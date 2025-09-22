@@ -1,24 +1,31 @@
-// src/composables/useRecipes.js
-import { db } from './firebase'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { ref, onMounted } from 'vue'
+import { db } from './firebase.js'
+import { collection, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
+
+const recipesFirebaseCollectionRef = collection(db, "recipes");
 
 export function useRecipes() {
-  const addRecipe = async (recipe) => {
-    try {
-      await addDoc(collection(db, 'recipes'), {
-        title: recipe.title,
-        category: recipe.category,
-        difficulty: recipe.difficulty,
-        images: recipe.images,
-        materialsUsed: recipe.materialsUsed,
-        steps: recipe.steps,
-        createdAt: serverTimestamp()
-      })
-      console.log("Opskrift gemt!")
-    } catch (e) {
-      console.error("Fejl ved tilføjelse:", e)
-    }
-  }
+  const recipes = ref([]);
+  const newRecipeTitle = ref("");
 
-  return { addRecipe }
+  onMounted(() => {
+    onSnapshot(recipesFirebaseCollectionRef, (snapshot) => {
+      recipes.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    });
+  });
+
+  const addRecipe = async () => {
+    if (newRecipeTitle.value.trim() == "") return;
+    await addDoc(recipesFirebaseCollectionRef, {
+      postName: newRecipeTitle.value
+    });
+    newRecipeTitle.value = "";
+  };
+
+  const deleteRecipe = async(id) => {
+    const recipeDoc = doc(db, "recipes", id);
+    await deleteDoc(recipeDoc);
+  };
+
+  return { recipes, newRecipeTitle, addRecipe, deleteRecipe };
 }
