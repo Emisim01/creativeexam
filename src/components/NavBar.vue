@@ -1,10 +1,10 @@
 <template>
-  <nav class="p-4 font-bold flex justify-center gap-4">
+  <nav class="welcomeText p-4 font-bold flex justify-center gap-4">
      <div class="hidden md:flex gap-4 ">
       <RouterLink to="/" class="nav-link">Home</RouterLink>
-      <RouterLink to="/#recipes" class="nav-link">Recipes</RouterLink>
-      <RouterLink to="/#generator" class="nav-link">Generator</RouterLink>
-      <RouterLink to="/#login/sign up" class="nav-link">Login/sign up</RouterLink>
+      <RouterLink to="/recipes" class="nav-link">Recipes</RouterLink>
+      <RouterLink to="/generator" class="nav-link">Generator</RouterLink>
+      <RouterLink to="/login/sign up" class="nav-link">Login/sign up</RouterLink>
         </div>
        <!-- Mobil knap -->
     <button class="md:hidden text-2xl" @click="toggleMenu">☰</button>
@@ -37,7 +37,7 @@ const closeMenu = () => {
 
 <style>
 nav {
-  font-size: 21px;
+  font-size: 25px;
   align-items: center;
   background-color: #FFE5C8;
   height: 80px;
@@ -56,6 +56,12 @@ button {
 
 .hamburgerMobile {
   font-size: 25px;
-  /* font-family: 'MerriweatherSans'; */
+  font-family: "Cherry Bomb One", system-ui;
+}
+
+.welcomeText {
+  font-family: "Cherry Bomb One", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
 </style>
