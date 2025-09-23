@@ -4,8 +4,9 @@
       <RouterLink to="/" class="nav-link">Home</RouterLink>
       <RouterLink to="/recipes" class="nav-link">Recipes</RouterLink>
       <RouterLink to="/generator" class="nav-link">Generator</RouterLink>
-      <RouterLink to="/login/sign up" class="nav-link">Login/sign up</RouterLink>
-        </div>
+      <AuthButton />
+      </div>
+
        <!-- Mobil knap -->
     <button class="md:hidden text-2xl" @click="toggleMenu">☰</button>
   </nav>
@@ -22,6 +23,8 @@
 <script setup>
   import { RouterLink } from 'vue-router'
   import { ref } from 'vue'
+  import AuthButton from './AuthButton.vue'
+
 
 const showMenu = ref(false)
 

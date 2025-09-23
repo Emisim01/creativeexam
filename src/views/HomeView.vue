@@ -1,6 +1,6 @@
 <template>
   <div>
- <img
+<img
       src="@/assets/heroImg.png" alt="Hero" class="w-screen h-[80vw] min-h-[250px] max-h-[500px] object-cover block"
     />
   </div>
@@ -69,3 +69,4 @@ const { recipes } = useRecipes()
 
 
 </style>
+
