@@ -108,7 +108,7 @@ const { recipes } = useRecipes()
 .categoryShower {
   font-family: "Cherry Bomb One", system-ui;
   margin: 0 22px;
-  background-color: #f064ac ;
+  background-color: #a9d193 ;
 }
 
 .generatorBox {

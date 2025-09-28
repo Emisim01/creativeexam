@@ -27,8 +27,7 @@ const router = createRouter({
     {
       path: '/generator',
       name: 'Generator',
-      component: () => import('@/views/GeneratorView.vue') // Sørg for, at denne fil eksisterer
-  }
+      component: () => import('@/views/GeneratorView.vue')  }
 
   ],
 })
