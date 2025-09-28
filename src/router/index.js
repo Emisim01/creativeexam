@@ -24,6 +24,12 @@ const router = createRouter({
       component: () => import('@/views/LoginView.vue')
     },
 
+    {
+      path: '/generator',
+      name: 'Generator',
+      component: () => import('@/views/GeneratorView.vue') // Sørg for, at denne fil eksisterer
+  }
+
   ],
 })
 

@@ -1,6 +1,6 @@
 <template>
-    <footer class=" text-white py-6 px-30">
-      <div class="footer-container flex justify-between items-center">
+    <footer class=" text-white">
+      <div class="footer-container flex justify-between items-center p-6">
         <div class="text-container flex flex-col">
           <p class="navnBox text-xl uppercase font-bold pb-2">Emilie Stryhn Simonsen</p>
           <div class="navnBox2 pb-2">
@@ -23,6 +23,7 @@
 <style scoped>
 .footer-container {
   background-color: #FF93CA ;
+  width: 100%;
 }
 
 .text-container {

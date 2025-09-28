@@ -1,9 +1,11 @@
 <template>
-  <div class="loginView">
-    <h1>Login</h1>
+  <div class="loginView p-4 text-4xl font-bold text-white justify-center gap-4">
+    <h1>Login here!</h1>
 <form @submit.prevent="loginUser">
+<div class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
 <input type="email" v-model="email" placeholder="Email" required />
 <input type="password" v-model="password" placeholder="Password" required />
+</div>
 <button type="submit" :disabled="loading">Login</button>
 </form>
 

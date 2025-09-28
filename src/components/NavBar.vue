@@ -42,7 +42,7 @@ const closeMenu = () => {
 nav {
   font-size: 25px;
   align-items: center;
-  background-color: #FFE5C8;
+  background-color: #FF93CA ;
   height: 80px;
 
 }
