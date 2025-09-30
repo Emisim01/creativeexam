@@ -27,9 +27,18 @@ const router = createRouter({
     {
       path: '/generator',
       name: 'Generator',
-      component: () => import('@/views/GeneratorView.vue')  }
+      component: () => import('@/views/GeneratorView.vue')
+    },
+
+   {
+      path: '/recipe/:id',
+      name: 'SingleRecipe',
+      component: () => import('@/views/SingleRecipeView.vue')
+    },
 
   ],
+
+
 })
 
 // Navigation guard to protect routes that require authentication
@@ -43,5 +52,6 @@ router.beforeEach((to, from, next) => {
   }
 
 })
+
 
 export default router
