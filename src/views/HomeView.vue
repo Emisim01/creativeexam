@@ -21,7 +21,7 @@
 
   </div>
 
-    <div class="categoryShower grid md:grid-cols-4 gap-6 mb-8 rounded-lg p-6">
+    <div class="categoryShower grid md:grid-cols-5 gap-6 mb-8 rounded-lg p-6">
       <!-- Crochet -->
       <div class="flex flex-col items-center cursor-pointer hover:scale-105 transition">
         <img src="@/assets/icons/crochet.png" alt="Crochet" class="w-12 h-12 mb-2" />
@@ -45,7 +45,13 @@
         <img src="@/assets/icons/sewing.png" alt="Sewing" class="w-12 h-12 mb-2" />
         <p class="text-white text-2xl">Sewing</p>
       </div>
-    </div>
+
+      <!-- Digital Design -->
+    <div class="flex flex-col items-center cursor-pointer hover:scale-105 transition">
+        <img src="@/assets/icons/design.png" alt="Design" class="w-12 h-12 mb-2" />
+        <p class="text-white text-2xl">Digital Design</p>
+      </div>
+      </div>
 
   <div>
       <p class="welcomeText p-4 text-4xl font-bold text-white flex justify-center gap-4">This is how it works!</p>
@@ -54,18 +60,15 @@
 
  <div class="random-task-generator bg-white text-center p-6 rounded-lg shadow-lg">
   <!-- Overskrift -->
-  <p class="welcomeText p-4 text-4xl font-bold text-gray-800">Don't know what to do? Try this!</p>
+  <p class="welcomeText p-4 text-4xl font-bold text-black">Don't know what to do? Try this!</p>
 
   <!-- Knappen -->
   <button
     @click="generateRandomTask"
-    class="generatorBox bg-purple-500 text-white px-6 py-3 rounded-lg"
-  >
-    Generate Random Task
-  </button>
+    class="generatorBox text-white px-4 py-2 rounded-lg cursor-pointer hover:scale-105 transition">Generate Random Task</button>
 
   <!-- Random Task Output -->
-  <p v-if="randomTask" class="mt-6 text-2xl font-bold text-gray-800">
+  <p v-if="randomTask" class="mt-10 text-2xl font-bold text-black">
     {{ randomTask.title }} - {{ randomTask.category }}
   </p>
 </div>
@@ -85,8 +88,6 @@ const randomTask = ref(null)
 // Fetch tasks from Firebase when the component is mounted
 onMounted(() => {
   fetchTasks()
-  console.log(tasks.value) // Tjek om tasks bliver fyldt med data fra Firebase
-
 })
 
 // Function to generate a random task
@@ -113,6 +114,11 @@ const { recipes } = useRecipes()
 
 .generatorBox {
   background-color: #f064ac ;
+  font-size: 25px;
+}
+
+.random-task-generator {
+  margin: 0 22px;
 }
 
 </style>
