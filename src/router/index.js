@@ -24,12 +24,6 @@ const router = createRouter({
       component: () => import('@/views/LoginView.vue')
     },
 
-    {
-      path: '/generator',
-      name: 'Generator',
-      component: () => import('@/views/GeneratorView.vue')
-    },
-
    {
       path: '/recipe/:id',
       name: 'SingleRecipe',
@@ -38,6 +32,18 @@ const router = createRouter({
 
   ],
 
+    scrollBehavior(to, from, savedPosition) {
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth',
+      }
+    } else if (savedPosition) {
+      return savedPosition
+    } else {
+      return { top: 0 }
+    }
+  },
 
 })
 
@@ -52,6 +58,8 @@ router.beforeEach((to, from, next) => {
   }
 
 })
+
+
 
 
 export default router

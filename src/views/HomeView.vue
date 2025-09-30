@@ -6,7 +6,7 @@
   </div>
   <div>
 
-      <p class="welcomeText p-4 text-4xl font-bold text-white flex justify-center gap-4">Find your next creative recipe here!</p>
+      <p class="welcomeText p-4 font-bold text-white flex justify-center gap-4">Find your next creative recipe here!</p>
   </div>
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 ">
   <div
@@ -55,13 +55,49 @@
       </div>
 
   <div>
-      <p class="welcomeText p-4 text-4xl font-bold text-white flex justify-center gap-4">This is how it works!</p>
+  <p class="welcomeText p-4 font-bold text-white flex justify-center gap-4">This is how it works!</p>
+</div>
+
+<div class="guide flex items-center justify-center gap-16 my-16">
+  <!-- Touchscreen Icon -->
+  <div class="">
+    <img src="@/assets/icons/touchscreen.png" alt="Touchscreen" class="w-32 h-32">
+    <p class="text-gray-700 text-center mt-6 text-2xl">Find a Creative Recipe</p>
   </div>
 
+  <!-- Arrow -->
+  <img src="@/assets/icons/arrow.png" alt="Arrow" class="w-16 h-16">
 
- <div class="random-task-generator bg-white text-center p-6 rounded-lg shadow-lg">
-  <p class="welcomeText p-4 text-4xl font-bold text-white">Don't know what to do? Try this!</p>
+  <!-- Steps Complete Icon -->
+  <div class="flex flex-col items-center">
+    <img src="@/assets/icons/stepsComplete.png" alt="Steps Complete" class="w-32 h-32">
+    <p class="text-gray-700 text-center mt-6 text-2xl">Follow the Steps</p>
+  </div>
 
+  <!-- Arrow -->
+  <img src="@/assets/icons/arrow.png" alt="Arrow" class="w-16 h-16">
+
+  <!-- Comment Icon -->
+  <div class="flex flex-col items-center">
+    <img src="@/assets/icons/comment.png" alt="Comment" class="w-32 h-32">
+    <p class="text-gray-700 text-center mt-6 text-2xl">Leave a Comment</p>
+  </div>
+
+  <!-- Arrow -->
+  <img src="@/assets/icons/arrow.png" alt="Arrow" class="w-16 h-16">
+
+  <!-- Share Icon -->
+  <div class="flex flex-col items-center">
+    <img src="@/assets/icons/share.png" alt="Share" class="w-32 h-32">
+    <p class="text-gray-700 text-center mt-6 text-2xl">Share with Your Friends</p>
+  </div>
+</div>
+
+<div>
+    <p class="welcomeText p-4 font-bold text-white flex justify-center gap-4">Don't know what to do? Try this!</p>
+</div>
+
+ <div id="random-task-generator" class="random-task-generator text-center p-6 rounded-lg shadow-lg">
   <button
     @click="generateRandomTask"
     class="generatorBox text-white px-4 py-2 rounded-lg cursor-pointer hover:scale-105 transition">Generate Random Task</button>
@@ -109,22 +145,27 @@ const { recipes } = useRecipes()
 <style scoped>
 .welcomeText {
   font-family: "Cherry Bomb One", system-ui;
+  margin-top: 15px;
+  font-size: 40px;
+}
+
+.guide {
+  margin-bottom: 70px;
 }
 
 .categoryShower {
   font-family: "Cherry Bomb One", system-ui;
-  margin: 0 22px;
+  margin: 70px 22px;
   background-color: #c2d4b8  ;
 }
 
 .generatorBox {
-  background-color: #f064ac ;
+  background-color: #c2d4b8 ;
   font-size: 25px;
 }
 
 .random-task-generator {
   margin: 0 22px;
-  background-color: #c2d4b8 ;
 }
 
 .randomTaskResult {

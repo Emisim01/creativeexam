@@ -3,7 +3,7 @@
      <div class="hidden md:flex gap-4 ">
       <RouterLink to="/" class="nav-link">Home</RouterLink>
       <RouterLink to="/recipes" class="nav-link">Recipes</RouterLink>
-      <RouterLink to="/generator" class="nav-link">Generator</RouterLink>
+      <RouterLink to="#random-task-generator" class="nav-link">Generator</RouterLink>
       <AuthButton />
       </div>
 
@@ -11,11 +11,11 @@
     <button class="md:hidden text-2xl" @click="toggleMenu">☰</button>
   </nav>
   <!-- Mobil menu dropdown -->
-  <div v-if="showMenu" class="hamburgerMobile flex flex-col gap-2 p-4 md:hidden bg-purple-300 text-white items-center" @mouseleave="closeMenu">
+  <div v-if="showMenu" class="hamburgerMobile flex flex-col gap-2 p-4 md:hidden bg-white text-white items-center" @mouseleave="closeMenu">
     <RouterLink to="/" class="nav-link">Home</RouterLink>
-    <RouterLink to="/#recipes" class="nav-link">Recipes</RouterLink>
+    <RouterLink to="/recipes" class="nav-link">Recipes</RouterLink>
     <RouterLink to="/#generator" class="nav-link">Generator</RouterLink>
-    <RouterLink to="/#login/sign up" class="nav-link">Login/sign up</RouterLink>
+    <RouterLink to="/login/sign up" class="nav-link">Login/sign up</RouterLink>
   </div>
 
 </template>
