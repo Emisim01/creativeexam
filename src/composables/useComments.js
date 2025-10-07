@@ -14,9 +14,9 @@ export function useComments(recipeId) {
   const fetchComments = () => {
     const q = query(
       collection(db, 'recipes', recipeId, 'comments'),
-      orderBy('createdAt', 'desc')
+      orderBy('createdAt', 'desc') // sorterer kommentarer efter oprettelsestidspunkt (nyeste først)
     )
-    onSnapshot(q, (snapshot) => {
+    onSnapshot(q, (snapshot) => { //Lytter til databasen for ændringer. når der sker en ændring, opdateres comments automatisk)
       comments.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
     })
   }
