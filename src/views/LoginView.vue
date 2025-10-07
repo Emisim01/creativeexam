@@ -1,5 +1,5 @@
 <template>
-  <div class="login-view pt-10 flex flex-col gap-4">
+  <div class="login-view  text-black">
     <h1>Login here!</h1>
     <form class="flex flex-col" @submit.prevent="loginUser">
       <input class="border border-indigo-300 p-2 !mb-4 rounded" type="email" v-model="email" placeholder="Email" required />

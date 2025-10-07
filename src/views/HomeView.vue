@@ -13,12 +13,12 @@
     v-for="recipe in recipes.slice(0,3)"
     :key="recipe.id"
     @click="goToRecipe(recipe.id)"
-    class="bg-white rounded-lg p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
+    class="bg-white rounded-lg text-black p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
   >
     <img src="@/assets/heroImg.png" alt="">
     <h2 class="text-xl font-bold mb-2">{{ recipe.title }}</h2>
-    <p class="text-gray-700">{{ recipe.category }}</p>
-    <p class="text-gray-700">{{ recipe.difficulty }}</p>
+    <p class="">{{ recipe.category }}</p>
+    <p class="">{{ recipe.difficulty }}</p>
   </div>
 </div>
 

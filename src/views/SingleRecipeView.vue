@@ -1,5 +1,5 @@
 <template>
-  <div v-if="recipe" class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+  <div v-if="recipe" class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg text-black">
     <!-- Titel -->
     <h1 class="text-5xl font-bold mb-6 text-center">{{ recipe.title }}</h1>
 
@@ -41,6 +41,42 @@
   <div v-else>
     <p class="text-red-500 text-center mt-6">Loading recipe or recipe not found...</p>
   </div>
+
+<!-- Kommentarer -->
+<div class="mt-10 text-black">
+  <h2 class="text-2xl font-bold mb-4">Comments</h2>
+
+  <!-- Kun vis dette hvis man er logget ind -->
+  <div v-if="user">
+    <textarea
+      v-model="commentText"
+      class="w-full border rounded-lg p-2 mb-2"
+      placeholder="Write a comment..."
+      rows="3"
+    ></textarea>
+    <button
+      @click="addComment"
+      :disabled="loading || !commentText.trim()"
+      class="bg-purple-500 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+    >
+      {{ loading ? 'Posting...' : 'Post Comment' }}
+    </button>
+    <p v-if="error" class="text-red-500 mt-2">{{ error }}</p>
+  </div>
+  <!-- Hvis ikke logget ind, vis kun denne tekst -->
+  <div v-else class="mb-4">
+    You must be logged in to comment.
+  </div>
+
+  <!-- Denne del vises altid, uanset login -->
+  <ul>
+    <li v-for="comment in comments" :key="comment.id" class="mb-4 border-b pb-2">
+      <div class="font-semibold">{{ comment.user }}</div>
+      <div>{{ comment.text }}</div>
+      <div class="text-xs ">{{ comment.createdAt?.toDate?.().toLocaleString?.() }}</div>
+    </li>
+  </ul>
+</div>
 </template>
 
 <script setup>
@@ -48,6 +84,8 @@ import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { db } from '@/composables/firebase.js'
 import { doc, getDoc } from 'firebase/firestore'
+import { useComments } from '@/composables/useComments.js'
+
 
 const route = useRoute()
 const recipe = ref(null)
@@ -58,6 +96,7 @@ onMounted(async () => {
     const recipeDoc = await getDoc(doc(db, 'recipes', recipeId))
     if (recipeDoc.exists()) {
       recipe.value = { id: recipeDoc.id, ...recipeDoc.data() }
+      fetchComments()
     } else {
       console.error('Recipe not found')
     }
@@ -65,6 +104,16 @@ onMounted(async () => {
     console.error('Error fetching recipe:', error)
   }
 })
+
+const {
+  comments,
+  commentText,
+  addComment,
+  fetchComments,
+  loading,
+  error,
+  user
+} = useComments(route.params.id)
 </script>
 
 <style>
