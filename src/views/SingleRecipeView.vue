@@ -1,5 +1,5 @@
 <template>
-  <div v-if="recipe" class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg text-black">
+  <div v-if="recipe" class="recipeBox w-full mx-auto p-6 bg-white rounded-lg shadow-lg text-black">
     <!-- Titel -->
     <h1 class="text-5xl font-bold mb-6 text-center">{{ recipe.title }}</h1>
 
@@ -43,7 +43,7 @@
   </div>
 
 <!-- Kommentarer -->
-<div class="mt-10 text-black">
+<div class="commentSection mt-10 text-black">
   <h2 class="text-2xl font-bold mb-4">Comments</h2>
 
   <!-- Kun vis dette hvis man er logget ind -->
@@ -70,7 +70,7 @@
 
   <!-- Denne del vises altid, uanset login -->
   <ul>
-    <li v-for="comment in comments" :key="comment.id" class="mb-4 border-b pb-2">
+    <li v-for="comment in comments" :key="comment.id" class="mb-4 border-2 border-white text-black pb-2">
       <div class="font-semibold">{{ comment.user }}</div>
       <div>{{ comment.text }}</div>
       <div class="text-xs ">{{ comment.createdAt?.toDate?.().toLocaleString?.() }}</div>
@@ -117,4 +117,16 @@ const {
 </script>
 
 <style>
+
+/* .recipeBox {
+  width: 100%;
+  margin-top: 50px;
+  margin-right: 50px;
+  margin-bottom: 50px;
+} */
+
+.commentSection {
+  max-width: 750px;
+  margin: 0 auto;
+}
 </style>
