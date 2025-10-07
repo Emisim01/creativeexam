@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useAuth } from '@/modules/useAuth.js'
+import { useAuth } from '../composables/useAuth.js';
 import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
@@ -18,10 +18,15 @@ const router = createRouter({
       meta: { requiresAuth: true }
     },
 
-         {
+    {
       path: '/login',
       name: 'Login',
       component: () => import('@/views/LoginView.vue')
+    },
+
+    {path: '/register',
+      name: 'register',
+      component: () => import('../views/RegisterView.vue'),
     },
 
    {
@@ -29,6 +34,7 @@ const router = createRouter({
       name: 'SingleRecipe',
       component: () => import('@/views/SingleRecipeView.vue')
     },
+
 
   ],
 

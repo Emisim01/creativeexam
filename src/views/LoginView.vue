@@ -1,13 +1,12 @@
 <template>
-  <div class="loginView p-4 text-4xl font-bold text-white justify-center gap-4">
+  <div class="login-view pt-10 flex flex-col gap-4">
     <h1>Login here!</h1>
-<form @submit.prevent="loginUser">
-<div class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500">
-<input type="email" v-model="email" placeholder="Email" required />
-<input type="password" v-model="password" placeholder="Password" required />
-</div>
-<button type="submit" :disabled="loading">Login</button>
-</form>
+    <form class="flex flex-col" @submit.prevent="loginUser">
+      <input class="border border-indigo-300 p-2 !mb-4 rounded" type="email" v-model="email" placeholder="Email" required />
+      <input class="border border-indigo-300 p-2 !mb-4 rounded" type="password" v-model="password" placeholder="Password" required />
+      <button class="bg-indigo-300 text-white rounded" type="submit" :disabled="loading">Login</button>
+      <router-link to="/register" class="text-indigo-300 text-center">Register</router-link>
+    </form>
 
 <div class="error" v-if="authError">
   {{ authError }}
@@ -23,7 +22,7 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useAuth } from '../modules/useAuth'
+import { useAuth } from '../composables/useAuth.js';
 
 const { login, authError,loading, isLoggedIn, currentUser } = useAuth()
 

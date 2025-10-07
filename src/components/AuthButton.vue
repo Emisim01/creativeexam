@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import { useAuth } from '../modules/useAuth.js'
+import { useAuth } from '../composables/useAuth.js';
 import { useRouter } from 'vue-router'
 
 const { isLoggedIn, logout } = useAuth()

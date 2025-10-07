@@ -5,20 +5,20 @@
 
     <!-- Kategori og sværhedsgrad -->
     <div class="flex justify-between items-center mb-6">
-      <p class="text-lg font-semibold text-gray-700">Category: {{ recipe.category }}</p>
-      <p class="text-lg font-semibold text-gray-700">Difficulty: {{ recipe.difficulty }}</p>
+      <p class="text-lg font-semibold ">Category: {{ recipe.category }}</p>
+      <p class="text-lg font-semibold ">Difficulty: {{ recipe.difficulty }}</p>
     </div>
 
     <!-- Materialer -->
     <div class="mb-6">
       <h2 class="text-2xl font-bold mb-2">Materials Used</h2>
-      <p class="text-gray-700">{{ recipe.materialUsed }}</p>
+      <p class="">{{ recipe.materialUsed }}</p>
     </div>
 
     <!-- Steps -->
 <div class="mb-6">
   <h2 class="text-2xl font-bold mb-2">Steps</h2>
-  <ul class="list-none text-gray-700"> <!-- Fjern punkttegn med list-none -->
+  <ul class="list-none ">
     <li v-for="(step, index) in recipe.steps" :key="index">
       <span class="font-semibold">Step {{ index + 1 }}:</span> {{ step }}
     </li>

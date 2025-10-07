@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue'
 import { db } from './firebase.js'
-import { collection, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, onSnapshot, addDoc, deleteDoc, doc, } from "firebase/firestore";
 
 const recipesFirebaseCollectionRef = collection(db, "recipes");
 
