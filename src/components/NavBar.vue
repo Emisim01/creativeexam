@@ -4,6 +4,8 @@
       <RouterLink to="/" class="nav-link text-dark-grass">Home</RouterLink>
       <RouterLink to="/recipes" class="nav-link text-dark-grass">Recipes</RouterLink>
       <RouterLink to="#random-task-generator" class="nav-link text-dark-grass">Generator</RouterLink>
+      <!-- Vis kun dette link, hvis brugeren er admin -->
+    <RouterLink v-if="isAdmin" to="/admin" class="nav-link text-dark-grass">Admin</RouterLink>
       <AuthButton />
       </div>
 
@@ -11,11 +13,12 @@
     <button class="md:hidden text-2xl" @click="toggleMenu">☰</button>
   </nav>
   <!-- Mobil menu dropdown -->
-  <div v-if="showMenu" class="hamburgerMobile flex flex-col gap-2 p-4 md:hidden bg-white text-dark-grass items-center" @mouseleave="closeMenu">
     <RouterLink to="/" class="nav-link text-dark-grass">Home</RouterLink>
     <RouterLink to="/recipes" class="nav-link text-dark-grass">Recipes</RouterLink>
     <RouterLink to="/#generator" class="nav-link text-dark-grass">Generator</RouterLink>
-    <RouterLink to="/login/sign up" class="nav-link text-dark-grass">Login/sign up</RouterLink>
+      <!-- Vis kun dette link, hvis brugeren er admin -->
+    <RouterLink v-if="isAdmin" to="/admin" class="nav-link text-dark-grass">Admin</RouterLink>
+      <AuthButton />
   </div>
 
 </template>
@@ -24,7 +27,11 @@
   import { RouterLink } from 'vue-router'
   import { ref } from 'vue'
   import AuthButton from './AuthButton.vue'
+  import { onMounted } from 'vue'
+  import { useAdmin } from '@/composables/useAdmin.js'
 
+// Hent isAdmin og checkAdmin fra din composable
+const { isAdmin, checkAdmin } = useAdmin()
 
 const showMenu = ref(false)
 
@@ -36,6 +43,11 @@ const toggleMenu = () => {
 const closeMenu = () => {
   showMenu.value = false
 }
+
+// Tjek om brugeren er admin, når komponenten indlæses
+onMounted(() => {
+  checkAdmin()
+})
 </script>
 
 <style>

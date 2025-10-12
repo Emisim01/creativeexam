@@ -1,5 +1,5 @@
 <template>
-<div class="register-view pt-10 flex flex-col gap-4 text-dark-grass">
+<div class="register-view pt-10 flex flex-col gap-4 text-light-grass">
     <h1>Register here!</h1>
     <form class="flex flex-col" @submit.prevent="registerUser">
       <input class="border border-indigo-300 p-2 !mb-4 rounded" type="email" v-model="email" placeholder="Email" required />
