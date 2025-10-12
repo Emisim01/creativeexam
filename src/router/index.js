@@ -38,6 +38,12 @@ const router = createRouter({
       component: () => import('@/views/SingleRecipeView.vue')
     },
 
+       {
+      path: '/generator',
+      name: 'Generator',
+      component: () => import('@/views/GeneratorView.vue')
+    },
+
     {
       path: '/admin',
       name: 'Admin',
@@ -45,19 +51,6 @@ const router = createRouter({
       meta: { requiresAdmin: true }
     },
   ],
-
-    scrollBehavior(to, from, savedPosition) {
-    if (to.hash) {
-      return {
-        el: to.hash,
-        behavior: 'smooth',
-      }
-    } else if (savedPosition) {
-      return savedPosition
-    } else {
-      return { top: 0 }
-    }
-  },
 
 })
 

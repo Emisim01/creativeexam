@@ -1,6 +1,6 @@
 <template>
   <div v-if="isAdmin">
-    <h1>Admin Panel</h1>
+    <h1 class="welcomeText">Admin Panel</h1>
     <p>Her kan du tilføje nye ting til hjemmesiden!</p>
   </div>
   <div v-else>
@@ -16,3 +16,13 @@ import { useAdmin } from '@/composables/useAdmin.js'
 // Hent bare isAdmin. Den opdaterer sig selv!
 const { isAdmin } = useAdmin()
 </script>
+
+<style scoped>
+.welcomeText {
+  font-family: "Cherry Bomb One", system-ui;
+  margin-top: 15px;
+  font-size: 40px;
+  color: var(--color-light-grass);
+}
+
+</style>

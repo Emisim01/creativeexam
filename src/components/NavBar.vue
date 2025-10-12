@@ -3,7 +3,7 @@
      <div class="hidden md:flex gap-4 text-dark-grass">
       <RouterLink to="/" class="nav-link text-dark-grass">Home</RouterLink>
       <RouterLink to="/recipes" class="nav-link text-dark-grass">Recipes</RouterLink>
-      <RouterLink to="#random-task-generator" class="nav-link text-dark-grass">Generator</RouterLink>
+      <RouterLink to="/generator" class="nav-link text-dark-grass">Generator</RouterLink>
       <!-- Vis kun dette link, hvis brugeren er admin -->
     <RouterLink v-if="isAdmin" to="/admin" class="nav-link text-dark-grass">Admin</RouterLink>
       <AuthButton />
@@ -16,7 +16,7 @@
   <div v-if="showMenu" class="hamburgerMobile flex flex-col gap-2 p-4 md:hidden bg-light-grass items-center" @mouseleave="closeMenu">
     <RouterLink to="/" class="nav-link text-dark-grass">Home</RouterLink>
     <RouterLink to="/recipes" class="nav-link text-dark-grass">Recipes</RouterLink>
-    <RouterLink to="/#generator" class="nav-link text-dark-grass">Generator</RouterLink>
+    <RouterLink to="/generator" class="nav-link text-dark-grass">Generator</RouterLink>
       <!-- Vis kun dette link, hvis brugeren er admin -->
     <RouterLink v-if="isAdmin" to="/admin" class="nav-link text-dark-grass">Admin</RouterLink>
       <AuthButton />
