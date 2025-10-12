@@ -1,9 +1,9 @@
 <template>
-  <nav class="welcomeText p-4 font-bold flex justify-center gap-4">
-     <div class="hidden md:flex gap-4 ">
-      <RouterLink to="/" class="nav-link">Home</RouterLink>
-      <RouterLink to="/recipes" class="nav-link">Recipes</RouterLink>
-      <RouterLink to="#random-task-generator" class="nav-link">Generator</RouterLink>
+  <nav class="welcomeText p-4 font-bold flex justify-center bg-light-grass gap-4">
+     <div class="hidden md:flex gap-4 text-dark-grass">
+      <RouterLink to="/" class="nav-link text-dark-grass">Home</RouterLink>
+      <RouterLink to="/recipes" class="nav-link text-dark-grass">Recipes</RouterLink>
+      <RouterLink to="#random-task-generator" class="nav-link text-dark-grass">Generator</RouterLink>
       <AuthButton />
       </div>
 
@@ -11,11 +11,11 @@
     <button class="md:hidden text-2xl" @click="toggleMenu">☰</button>
   </nav>
   <!-- Mobil menu dropdown -->
-  <div v-if="showMenu" class="hamburgerMobile flex flex-col gap-2 p-4 md:hidden bg-white text-white items-center" @mouseleave="closeMenu">
-    <RouterLink to="/" class="nav-link">Home</RouterLink>
-    <RouterLink to="/recipes" class="nav-link">Recipes</RouterLink>
-    <RouterLink to="/#generator" class="nav-link">Generator</RouterLink>
-    <RouterLink to="/login/sign up" class="nav-link">Login/sign up</RouterLink>
+  <div v-if="showMenu" class="hamburgerMobile flex flex-col gap-2 p-4 md:hidden bg-white text-dark-grass items-center" @mouseleave="closeMenu">
+    <RouterLink to="/" class="nav-link text-dark-grass">Home</RouterLink>
+    <RouterLink to="/recipes" class="nav-link text-dark-grass">Recipes</RouterLink>
+    <RouterLink to="/#generator" class="nav-link text-dark-grass">Generator</RouterLink>
+    <RouterLink to="/login/sign up" class="nav-link text-dark-grass">Login/sign up</RouterLink>
   </div>
 
 </template>
@@ -42,17 +42,11 @@ const closeMenu = () => {
 nav {
   font-size: 25px;
   align-items: center;
-  background-color: #FF93CA ;
   height: 80px;
-
-}
-
-.nav-link {
-  color: white;
 }
 
 button {
-  color: white;
+  color: var(--color-dark-grass);
   font-size: 40px;
   cursor: pointer;
 }

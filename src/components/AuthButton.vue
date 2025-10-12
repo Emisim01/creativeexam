@@ -17,7 +17,7 @@ logout(router)
 
 <style scoped>
 .auth-button {
-  color: white;
+  color: var(--color-dark-grass);
   font-size: 25px;
 }
 </style>

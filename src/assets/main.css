@@ -2,6 +2,14 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
 
+@theme {
+--color-brigth-sand: #fcf1dc;
+--color-dark-grass: #2E3D34;
+--color-light-grass:  #9BBF9B;
+
+
+}
+
 #app {
   max-width: 100%;
   margin: 0 auto;
@@ -10,14 +18,12 @@
 
 a,
 .green {
-  color: white;
   transition: 0.4s;
   padding: 0 50px ;
 }
 
 a:hover {
-  color: #e62d8c;
-  text-decoration: underline 10% #fff;
+  text-decoration: underline 10% var(--color-dark-grass);
   text-underline-offset: 5px;
 }
 

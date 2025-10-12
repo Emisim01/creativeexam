@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="welcomeText p-4 text-4xl font-bold text-white flex justify-center gap-4">Creative recipes!</p>
+    <p class="welcomeText p-4 text-4xl font-bold flex justify-center gap-4">Creative recipes!</p>
   </div>
 
     <!-- Dropdown til filtrering -->
@@ -24,7 +24,7 @@
     v-for="recipe in filteredRecipes"
     :key="recipe.id"
     @click="goToRecipe(recipe.id)"
-    class="bg-white text-black rounded-lg p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
+    class="bg-white text-dark-grass rounded-lg p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
   >
     <img src="@/assets/heroImg.png" alt="" />
     <h2 class="text-xl font-bold mb-2">{{ recipe.title }}</h2>
@@ -73,5 +73,6 @@ const goToRecipe = (id) => {
 <style scoped>
 .welcomeText {
   font-family: 'Cherry Bomb One', system-ui;
+  color: var(--color-light-grass);
 }
 </style>

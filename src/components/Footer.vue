@@ -1,5 +1,5 @@
 <template>
-    <footer class=" text-white">
+    <footer class="bg-light-grass text-dark-grass">
       <div class="footer-container flex justify-between items-center p-6">
         <div class="text-container flex flex-col">
           <p class="navnBox text-xl uppercase font-bold pb-2">Emilie Stryhn Simonsen</p>
@@ -22,7 +22,7 @@
 
 <style scoped>
 .footer-container {
-  background-color: #FF93CA ;
+  background-color: #9BBF9B;;
   width: 100%;
 }
 

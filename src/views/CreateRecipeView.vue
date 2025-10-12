@@ -22,18 +22,6 @@
 /* import { usePosts } from '../composables/usePosts.js'
 const { posts, newPostTitle, addPost, deletePost } = usePosts(); */
 
-// // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import { getFirestore, collection, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
-// // TODO: Add SDKs for Firebase products that you want to use
-// // https://firebase.google.com/docs/web/setup#available-libraries
-
-
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig); //initialize firebase
-// const db = getFirestore(app); //initialize Firestore and store the reference db
-
-
 </script>
 
 

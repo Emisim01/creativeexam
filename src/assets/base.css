@@ -60,8 +60,7 @@
 body {
   min-height: 100vh;
   color: var(--color-text);
-background: #FF93CA;
-background: linear-gradient(0deg, rgba(255, 147, 202, 1) 0%, rgba(255, 146, 216, 1) 13%, rgba(255, 166, 221, 1) 38%, rgba(255, 198, 214, 1) 58%, rgba(255, 229, 200, 1) 100%);
+background: #2E3D34;
   transition:
     color 0.5s,
     background-color 0.5s;
