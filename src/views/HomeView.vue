@@ -1,7 +1,7 @@
 <template>
   <div>
 <img
-      src="@/assets/heroImg.png" alt="Hero" class="w-screen h-[80vw] min-h-[250px] max-h-[500px] object-cover block"
+      src="@/assets/heroImg.png" alt="Hero" class="w-screen h-[80vw] min-h-[250px] max-h-[600px] object-cover block"
     />
   </div>
   <div>
