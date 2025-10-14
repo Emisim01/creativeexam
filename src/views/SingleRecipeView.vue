@@ -47,39 +47,47 @@
   </div>
 
 <!-- Kommentarer -->
-<div class="commentSection mt-10 text-light-grass">
-  <h2 class="text-2xl font-bold mb-4">Comments</h2>
+<div class="commentSection !mt-10 text-light-grass">
+  <h2 class="commentTextHeader text-center mb-10">Comments</h2>
+
+  <!-- Liste af kommentarer -->
+  <ul class="theCommentSectionBoxes !space-y-4">
+    <li v-for="comment in comments" :key="comment.id" class="bg-white/10 p-4 rounded-lg shadow-sm ">
+      <div class="flex justify-between items-center mb-2">
+        <div class="font-bold text-light-grass">{{ comment.user }}</div>
+        <div class="text-xs text-light-grass/70">{{ comment.createdAt?.toDate?.().toLocaleString?.() }}</div>
+      </div>
+      <p class="text-light-grass/90">{{ comment.text }}</p>
+    </li>
+  </ul>
 
   <!-- Kun vis dette hvis man er logget ind -->
-  <div v-if="user">
+  <div v-if="user" class="theCommentSection !mb-8 !mt-8 !p-4 bg-white/10 rounded-md">
     <textarea
       v-model="commentText"
-      class="w-full border rounded-lg p-2 mb-2"
+      class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass"
       placeholder="Write a comment..."
       rows="3"
     ></textarea>
+
+   <!-- Post Comment knap-->
     <button
       @click="addComment"
       :disabled="loading || !commentText.trim()"
-      class="bg-purple-500 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+      class="w-full bg-light-grass text-dark-grass font-bold px-4 py-2 rounded-md hover:bg-opacity-80 hover:scale-[1.02] transition disabled:opacity-50 disabled:cursor-not-allowed"
     >
       {{ loading ? 'Posting...' : 'Post Comment' }}
     </button>
+
     <p v-if="error" class="text-red-500 mt-2">{{ error }}</p>
-  </div>
-  <!-- Hvis ikke logget ind, vis kun denne tekst -->
-  <div v-else class="mb-4 text-light-grass">
-    You must be logged in to comment.
+
   </div>
 
-  <!-- Denne del vises altid, uanset login -->
-  <ul>
-    <li v-for="comment in comments" :key="comment.id" class="mb-4 border-2 border-white text-light-grass pb-2">
-      <div class="font-semibold">{{ comment.user }}</div>
-      <div>{{ comment.text }}</div>
-      <div class="text-xs ">{{ comment.createdAt?.toDate?.().toLocaleString?.() }}</div>
-    </li>
-  </ul>
+  <!-- Hvis ikke logget ind, vis en pænere besked -->
+  <div v-else class="mustBeLoggedIn !mb-8 !mt-8 !p-4 bg-white/10 rounded-md text-center text-light-grass/80">
+    You must be <RouterLink to="/login" class="font-bold text-light-grass hover:underline">logged in</RouterLink> to comment.
+  </div>
+
 </div>
 </template>
 
@@ -121,6 +129,13 @@ const {
 </script>
 
 <style>
+.commentTextHeader {
+  font-family: "Cherry Bomb One", system-ui;
+  margin-top: 15px;
+  font-size: 40px;
+  color: var(--color-light-grass);
+}
+
 
 .recipeBox {
   margin-top: 70px;
@@ -128,9 +143,20 @@ const {
   margin-right: 50px;
 }
 
-.commentSection {
-  max-width: 750px;
-  margin: 0 auto;
-
+.theCommentSectionBoxes {
+  margin-left: 50px;
+  margin-right: 50px;
 }
+
+.mustBeLoggedIn {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.theCommentSection {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+
 </style>
