@@ -1,7 +1,7 @@
 <template>
   <div v-if="recipe" class="recipeBox p-6 bg-white rounded-lg text-dark-grass">
     <!-- Titel -->
-    <h1 class="text-5xl font-bold mb-6 text-center">{{ recipe.title }}</h1>
+    <h1 class="text-5xl font-bold mb-6 text-center">{{ recipe.recipeTitle }}</h1>
 
     <!-- Kategori og sværhedsgrad -->
     <div class="">

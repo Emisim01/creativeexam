@@ -2,16 +2,15 @@
   <div>
     <p class="welcomeText p-4 text-4xl font-bold flex justify-center gap-4">Creative recipes!</p>
   </div>
-
-    <!-- Dropdown til filtrering -->
-    <div class="flex justify-center mb-6">
+   <!-- Dropdown til filtrering -->
+    <div class="flex justify-center items-center mb-8">
+      <label for="category-filter" class="text-light-grass mr-3 font-semibold">Filter by:</label>
       <select
+        id="category-filter"
         v-model="selectedCategory"
-        @change="filterRecipes"
-        class="p-2 border rounded-lg">
-
-        <option value="">All Categories</option>
-        <option v-for="category in categories" :key="category" :value="category">
+        class="categoryFilterBox bg-white/20 text-light-grass p-2 rounded-md border border-light-grass/30 focus:outline-none focus:ring-2 focus:ring-light-grass">
+        <option value="" class="bg-dark-grass">All Categories</option>
+        <option v-for="category in categories" :key="category" :value="category" class="bg-dark-grass">
           {{ category }}
         </option>
       </select>
@@ -27,7 +26,7 @@
     class="bg-white text-dark-grass rounded-lg p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
   >
     <img src="@/assets/heroImg.png" alt="" />
-    <h2 class="text-xl font-bold mb-2">{{ recipe.title }}</h2>
+    <h2 class="text-xl font-bold mb-2">{{ recipe.recipeTitle }}</h2>
     <p class="">{{ recipe.category }}</p>
     <p class="">{{ recipe.difficulty }}</p>
   </div>
@@ -59,11 +58,6 @@ const filteredRecipes = computed(() => {
   return recipes.value.filter(recipe => recipe.category === selectedCategory.value)
 })
 
-// Funktion til filtrering (valgfri, hvis du vil logge ændringer)
-const filterRecipes = () => {
-  console.log('Selected category:', selectedCategory.value)
-}
-
 const goToRecipe = (id) => {
   // Naviger til den enkelte opskrift ved hjælp af dens id
   router.push({ name: 'SingleRecipe', params: { id } })
@@ -74,5 +68,9 @@ const goToRecipe = (id) => {
 .welcomeText {
   font-family: 'Cherry Bomb One', system-ui;
   color: var(--color-light-grass);
+}
+
+.categoryFilterBox {
+margin-left: 10px;
 }
 </style>

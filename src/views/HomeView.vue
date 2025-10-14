@@ -17,7 +17,7 @@
     class="bg-white rounded-lg p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
   >
     <img src="@/assets/heroImg.png" alt="">
-    <h2 class="text-xl font-bold mb-2">{{ recipe.title }}</h2>
+    <h2 class="text-xl font-bold mb-2">{{ recipe.recipeTitle }}</h2>
     <p class="">{{ recipe.category }}</p>
     <p class="">{{ recipe.difficulty }}</p>
   </div>
