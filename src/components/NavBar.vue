@@ -1,5 +1,5 @@
 <template>
-  <nav class="welcomeText p-4 font-bold flex justify-center bg-light-grass gap-4">
+  <nav class="welcomeText p-4 flex justify-center bg-light-grass gap-4">
      <div class="hidden md:flex gap-4 text-dark-grass">
       <RouterLink to="/" class="nav-link text-dark-grass">Home</RouterLink>
       <RouterLink to="/recipes" class="nav-link text-dark-grass">Recipes</RouterLink>
@@ -53,7 +53,7 @@ onMounted(() => {
 
 <style>
 nav {
-  font-size: 25px;
+  font-size: 30px;
   align-items: center;
   height: 80px;
 }
