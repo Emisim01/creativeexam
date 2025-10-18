@@ -47,11 +47,11 @@
   </div>
 
 <!-- Kommentarer -->
-<div class="commentSection !mt-10 text-light-grass">
+<div class="commentSection !mt-10 text-light-grass ">
   <h2 class="commentTextHeader text-center mb-10">Comments</h2>
 
   <!-- Liste af kommentarer -->
-  <ul class="theCommentSectionBoxes !space-y-4">
+  <ul class="theCommentSectionBoxes !space-y-4 ">
     <li v-for="comment in comments" :key="comment.id" class="bg-white/10 p-4 rounded-lg shadow-sm ">
       <div class="flex justify-between items-center mb-2">
         <div class="font-bold text-light-grass">{{ comment.user }}</div>

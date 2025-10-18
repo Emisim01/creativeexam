@@ -1,4 +1,5 @@
 <template>
+    <div class="min-h-screen">
 <div class="register-view text-light-grass p-8 bg-white/10 rounded">
     <h1>Register here!</h1>
     <form class="flex flex-col" @submit.prevent="registerUser">
@@ -10,6 +11,7 @@
     <div class="error" v-if="authError">
       {{ authError }}
     </div>
+  </div>
   </div>
 </template>
 

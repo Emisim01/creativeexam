@@ -1,4 +1,6 @@
 <template>
+
+    <div class="min-h-screen">
   <div class="login-view  text-light-grass p-8 bg-white/10 rounded">
     <h1>Login here!</h1>
     <form class="flex flex-col" @submit.prevent="loginUser">
@@ -16,6 +18,8 @@
   Logged in as {{ currentUser?.email }}
 
 </div>
+
+  </div>
 
   </div>
 </template>
