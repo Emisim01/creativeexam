@@ -7,7 +7,7 @@
     </div>
 
 <div class="generatorAll max-w-2xl mx-auto p-8">
-      <div class="bg-white/10 rounded-2xl p-8 shadow-2xl border-4 border-dashed border-light-grass/40">
+      <div class="bg-white/10 rounded-2xl p-8 shadow-2xl border border-light-grass/40">
 
         <!-- Generator Button -->
         <div class="text-center !mb-8">
@@ -75,7 +75,7 @@ const generateRandomTask = () => {
 
 .generatorAll {
   max-width: 900px;
-  margin: 30px auto;
+  margin: 25px auto;
 }
 
 .generatorBox{

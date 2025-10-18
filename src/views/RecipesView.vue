@@ -40,7 +40,7 @@ import { useRecipes } from '@/composables/useRecipes.js'
 
 const { recipes } = useRecipes()
 const router = useRouter() // Initialiser useRouter
-const route = useRoute() // <-- DENNE LINJE ER NY OG VIGTIG
+const route = useRoute() // Initialiser useRoute
 
 
 // Reactive state for selected category

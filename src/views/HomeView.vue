@@ -23,7 +23,7 @@
   </div>
 </div>
 
-    <div class="categoryShower grid md:grid-cols-5 gap-6 mb-8 rounded-lg p-6 text-dark-grass">
+    <div class="categoryShower grid md:grid-cols-5 gap-6 mb-8 rounded-lg p-6 text-dark-grass ">
       <!-- Crochet -->
       <div @click="goToCategory('Crochet')" class="flex flex-col items-center cursor-pointer hover:scale-105 transition">
         <img src="@/assets/icons/crochet.png" alt="Crochet" class="w-12 h-12 mb-2" />

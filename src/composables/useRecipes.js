@@ -1,6 +1,6 @@
 import { ref, onMounted } from 'vue'
 import { db } from './firebase.js'
-import { collection, onSnapshot, addDoc, deleteDoc, doc } from "firebase/firestore";
+import { collection, onSnapshot, addDoc, deleteDoc, updateDoc, doc, serverTimestamp, } from "firebase/firestore";
 
 const recipesFirebaseCollectionRef = collection(db, "recipes");
 
@@ -16,14 +16,14 @@ const createNewRecipeObject = () => ({
 
 export function useRecipes() {
   const recipes = ref([]);
-  // Vi bruger nu et objekt til at holde alle data for en ny opskrift
   const newRecipe = ref(createNewRecipeObject());
 
-  onMounted(() => {
-    onSnapshot(recipesFirebaseCollectionRef, (snapshot) => {
-      recipes.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    });
+onMounted(() => {
+  // FJERN orderBy midlertidigt for at se dine eksisterende opskrifter
+  onSnapshot(recipesFirebaseCollectionRef, (snapshot) => {
+    recipes.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   });
+});
 
   const addRecipe = async () => {
     // Tjekker om de vigtigste felter er udfyldt
@@ -42,11 +42,42 @@ export function useRecipes() {
       difficulty: newRecipe.value.difficulty,
       materialUsed: materialsArray,
       steps: stepsArray,
-      videoLink: newRecipe.value.videoLink
+      videoLink: newRecipe.value.videoLink,
+      createdAt: serverTimestamp() // TILFØJ DETTE for at kunne sortere
     });
 
     // Nulstil formularen efter tilføjelse
     newRecipe.value = createNewRecipeObject();
+  };
+
+  // Opdater en eksisterende opskrift
+  const updateRecipe = async (id, updatedData) => {
+    try {
+      // Validering
+      if (!updatedData.recipeTitle || !updatedData.category || !updatedData.difficulty) {
+        alert("Please fill out title, category, and difficulty.");
+        return;
+      }
+
+      const recipeDoc = doc(db, "recipes", id);
+      await updateDoc(recipeDoc, {
+        recipeTitle: updatedData.recipeTitle,
+        category: updatedData.category,
+        difficulty: updatedData.difficulty,
+        materialUsed: updatedData.materialUsed.split('\n').filter(m => m.trim() !== ''),
+        steps: updatedData.steps.split('\n').filter(s => s.trim() !== ''),
+        videoLink: updatedData.videoLink,
+        updatedAt: serverTimestamp()
+      });
+
+      console.log(`Recipe with ID: ${id} has been updated.`);
+
+      // Nulstil formularen
+      newRecipe.value = createNewRecipeObject();
+    } catch (error) {
+      console.error("Error updating recipe: ", error);
+      alert("Could not update the recipe. Check the console for errors.");
+    }
   };
 
   const deleteRecipe = async(id) => {
@@ -54,6 +85,5 @@ export function useRecipes() {
     await deleteDoc(recipeDoc);
   };
 
-  // Returner det nye objekt og de eksisterende funktioner
-  return { recipes, newRecipe, addRecipe, deleteRecipe };
+  return { recipes, newRecipe, addRecipe, updateRecipe, deleteRecipe };
 }
