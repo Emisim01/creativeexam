@@ -1,11 +1,11 @@
 <template>
-  <div class="login-view  text-black">
+  <div class="login-view  text-light-grass p-8 bg-white/10 rounded">
     <h1>Login here!</h1>
     <form class="flex flex-col" @submit.prevent="loginUser">
-      <input class="border border-indigo-300 p-2 !mb-4 rounded" type="email" v-model="email" placeholder="Email" required />
-      <input class="border border-indigo-300 p-2 !mb-4 rounded" type="password" v-model="password" placeholder="Password" required />
-      <button class="bg-indigo-300 text-white rounded" type="submit" :disabled="loading">Login</button>
-      <router-link to="/register" class="text-indigo-300 text-center">Register</router-link>
+      <input class="border border-light-grass p-2 !mb-4 rounded" type="email" v-model="email" placeholder="Email" required />
+      <input class="border border-light-grass p-2 !mb-4 rounded" type="password" v-model="password" placeholder="Password" required />
+      <button class="bg-light-grass text-dark-grass rounded" type="submit" :disabled="loading">Login</button>
+      <router-link to="/register" class="text-light-grass text-center !mt-4">Register</router-link>
     </form>
 
 <div class="error" v-if="authError">
@@ -37,8 +37,8 @@ const loginUser = () => {
 
 <style scoped>
 .login-view {
-  max-width: 400px;
-  margin: 20px auto;
+  max-width: 600px;
+  margin: 50px auto;
 }
 
 .error {

@@ -34,15 +34,24 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router' // Importér useRouter
+import { ref, computed, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router' // Importér useRouter
 import { useRecipes } from '@/composables/useRecipes.js'
 
 const { recipes } = useRecipes()
 const router = useRouter() // Initialiser useRouter
+const route = useRoute() // <-- DENNE LINJE ER NY OG VIGTIG
+
 
 // Reactive state for selected category
 const selectedCategory = ref('')
+
+// DENNE BLOK ER NY - den læser kategorien fra URL'en
+onMounted(() => {
+  if (route.query.category) {
+    selectedCategory.value = route.query.category
+  }
+})
 
 // Computed property for unique categories
 const categories = computed(() => {
