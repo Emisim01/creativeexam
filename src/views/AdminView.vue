@@ -24,7 +24,7 @@
             <option>Sewing</option>
             <option>Drawing</option>
             <option>Crochet</option>
-            <option>Digital Design</option>
+            <option>Digital design</option>
             <option>Embroidery</option>
           </select>
           <select v-model="newRecipe.difficulty" class="w-full p-3 bg-white/20 text-light-grass rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass">
