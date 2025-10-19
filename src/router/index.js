@@ -16,8 +16,8 @@ const router = createRouter({
       path: '/recipes',
       name: 'Recipes',
       component: () => import('@/views/RecipesView.vue'),
-      meta: { requiresAuth: true }
     },
+
     {
       path: '/login',
       name: 'Login',
