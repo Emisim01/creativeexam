@@ -1,10 +1,10 @@
 <template>
   <div class="min-h-screen px-4 py-6">
     <!-- Recipe Content -->
-    <div v-if="recipe" class="recipeBox max-w-4xl !mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+    <div v-if="recipe" class="recipeBox max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
       <!-- Hero Section -->
       <div class="bg-gradient-to-r from-light-grass to-light-grass/80 p-6 sm:p-8 text-center">
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold !mb-4 text-dark-grass">{{ recipe.recipeTitle }}</h1>
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-dark-grass">{{ recipe.recipeTitle }}</h1>
 
         <!-- Kategori og sværhedsgrad -->
         <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
@@ -20,8 +20,8 @@
       <!-- Content -->
       <div class="p-6 sm:p-8 text-dark-grass">
         <!-- Materialer -->
-        <div class="!mb-8">
-          <h2 class="text-2xl sm:text-3xl font-bold !mb-4 text-center text-dark-grass flex items-center justify-center gap-2">
+        <div class="mb-8">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-center text-dark-grass flex items-center justify-center gap-2">
             🛠️ Materials Used
           </h2>
           <div class="bg-gray-50 rounded-xl p-4 sm:p-6">
@@ -36,11 +36,11 @@
         </div>
 
         <!-- Steps -->
-        <div class="!mb-8">
-          <h2 class="text-2xl sm:text-3xl font-bold !mb-4 text-center text-dark-grass flex items-center justify-center gap-2">
+        <div class="mb-8">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-center text-dark-grass flex items-center justify-center gap-2">
             📋 Steps
           </h2>
-          <div class="!space-y-4">
+          <div class="space-y-4">
             <div v-for="(step, index) in recipe.steps" :key="index"
                  class="flex gap-4 p-4 bg-gray-50 rounded-xl">
               <div class="flex-shrink-0 w-8 h-8 bg-light-grass text-dark-grass rounded-full flex items-center justify-center font-bold text-sm">
@@ -52,8 +52,8 @@
         </div>
 
         <!-- Video Link -->
-        <div v-if="recipe.videoLink" class="!mb-8 text-center">
-          <h2 class="text-2xl sm:text-3xl font-bold !mb-4 text-dark-grass flex items-center justify-center gap-2">
+        <div v-if="recipe.videoLink" class="mb-8 text-center">
+          <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-dark-grass flex items-center justify-center gap-2">
             🎥 Video Tutorial
           </h2>
           <a
@@ -72,16 +72,16 @@
 
     <!-- Loading State -->
     <div v-else class="text-center py-20">
-      <div class="animate-spin w-12 h-12 border-4 border-light-grass border-t-transparent rounded-full !mx-auto !mb-4"></div>
+      <div class="animate-spin w-12 h-12 border-4 border-light-grass border-t-transparent rounded-full mx-auto mb-4"></div>
       <p class="text-light-grass text-lg">Loading recipe...</p>
     </div>
 
     <!-- Kommentarer Section -->
-    <div class="commentSection max-w-4xl !mx-auto !mt-12">
-      <h2 class="commentTextHeader text-center !mb-4 sm:!mb-8">💬 Comments</h2>
+    <div class="commentSection max-w-4xl mx-auto mt-12">
+      <h2 class="commentTextHeader text-center mb-4 sm:mb-8">💬 Comments</h2>
 
       <!-- Add Comment Form (hvis logget ind) -->
-      <div v-if="user" class="theCommentSection !mb-8 bg-white/10 rounded-2xl !p-4 sm:!p-6 backdrop-blur-sm border border-light-grass/20">
+      <div v-if="user" class="theCommentSection mb-8 bg-white/10 rounded-2xl p-4 sm:p-6 backdrop-blur-sm border border-light-grass/20">
         <div class="flex items-start gap-4">
           <div class="w-10 h-10 bg-light-grass rounded-full flex items-center justify-center flex-shrink-0">
             <span class="text-dark-grass font-bold text-sm">{{ user.email?.charAt(0).toUpperCase() }}</span>
@@ -94,7 +94,7 @@
               rows="3"
             ></textarea>
 
-            <div class="flex justify-end !mt-3">
+            <div class="flex justify-end mt-3">
               <button
                 @click="addComment"
                 :disabled="loading || !commentText.trim()"
@@ -110,9 +110,9 @@
       </div>
 
       <!-- Login Prompt -->
-      <div v-else class="mustBeLoggedIn !mb-8 bg-white/10 rounded-2xl !p-6 text-center backdrop-blur-sm border border-light-grass/20">
-        <div class="text-4xl !mb-4">🔒</div>
-        <p class="text-light-grass/80 !mb-4 text-sm sm:text-base">Join the conversation!</p>
+      <div v-else class="mustBeLoggedIn mb-8 bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm border border-light-grass/20">
+        <div class="text-4xl mb-4">🔒</div>
+        <p class="text-light-grass/80 mb-4 text-sm sm:text-base">Join the conversation!</p>
         <RouterLink to="/login"
                     class="inline-block bg-light-grass text-dark-grass font-bold px-6 py-3 rounded-xl hover:bg-opacity-80 transition">
           Sign in to comment
@@ -120,14 +120,14 @@
       </div>
 
       <!-- Comments List -->
-      <div class="theCommentSectionBoxes !space-y-4 sm:space-y-6">
+      <div class="theCommentSectionBoxes space-y-4 sm:space-y-6">
         <div v-if="comments.length === 0" class="text-center py-12 text-light-grass/60">
-          <div class="text-4xl !mb-4">💭</div>
+          <div class="text-4xl mb-4">💭</div>
           <p class="text-sm sm:text-base">No comments yet. Be the first to share your thoughts!</p>
         </div>
 
         <div v-for="comment in comments" :key="comment.id"
-             class="bg-white/10 rounded-2xl !p-4 sm:!p-6 backdrop-blur-sm border border-light-grass/20 hover:bg-white/15 transition-colors">
+             class="bg-white/10 rounded-2xl p-4 sm:p-6 backdrop-blur-sm border border-light-grass/20 hover:bg-white/15 transition-colors">
           <div class="flex items-start gap-4">
             <!-- Avatar -->
             <div class="w-10 h-10 bg-light-grass/30 rounded-full flex items-center justify-center flex-shrink-0">
@@ -136,7 +136,7 @@
 
             <!-- Comment Content -->
             <div class="flex-1 min-w-0">
-              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between !mb-2 gap-1">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1">
                 <h4 class="font-bold text-light-grass text-sm sm:text-base">{{ comment.user }}</h4>
                 <time class="text-xs sm:text-sm text-light-grass/70 flex items-center gap-1">
                   <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -205,11 +205,6 @@ const {
   }
 }
 
-/* Smooth scrolling for better UX */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Custom scrollbar for textarea */
 textarea::-webkit-scrollbar {
   width: 6px;
@@ -220,8 +215,4 @@ textarea::-webkit-scrollbar-track {
   border-radius: 3px;
 }
 
-textarea::-webkit-scrollbar-thumb {
-  background: var(--color-light-grass);
-  border-radius: 3px;
-}
 </style>

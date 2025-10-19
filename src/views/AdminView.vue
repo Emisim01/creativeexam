@@ -1,16 +1,16 @@
 <template>
   <!-- Vises kun hvis brugeren er admin -->
   <div v-if="isAdmin" class="mx-auto p-4 sm:p-6">
-    <h1 class="welcomeText text-center !mb-6 sm:mb-10 text-2xl sm:text-4xl">Admin Panel</h1>
+    <h1 class="welcomeText text-center mb-6 sm:mb-10 text-2xl sm:text-4xl">Admin Panel</h1>
 
     <!-- Sektion for at tilføje/redigere en opskrift -->
-    <div class="recipeMaker bg-white/10 p-4 sm:p-6 rounded-lg shadow-lg !mb-8 sm:!mb-12 border border-light-grass/40 mx-2 sm:mx-8 lg:mx-16">
-      <h2 class="text-xl sm:text-2xl font-bold text-light-grass !mb-6 sm:!mb-12 text-center sm:text-left">
+    <div class="recipeMaker bg-white/10 p-4 sm:p-6 rounded-lg shadow-lg mb-8 sm:mb-12 border border-light-grass/40 mx-2 sm:mx-8 lg:mx-16">
+      <h2 class="text-xl sm:text-2xl font-bold text-light-grass mb-6 sm:mb-12 text-center sm:text-left">
         {{ editingRecipe ? 'Edit Recipe' : 'Add a New Recipe' }}
       </h2>
 
       <!-- Formularfelter -->
-      <div class="!space-y-4">
+      <div class="space-y-4">
         <!-- Titel -->
         <input
           type="text"

@@ -54,7 +54,6 @@
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
 }
 
 body {
@@ -81,3 +80,5 @@ background: #2E3D34;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+
