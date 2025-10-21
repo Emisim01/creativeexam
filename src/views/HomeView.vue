@@ -1,7 +1,7 @@
 <template>
   <div>
 <img
-      src="@/assets/heroImg.png" alt="Hero" class="w-screen h-[80vw] min-h-[250px] max-h-[630px] object-cover block"
+      src="@/assets/heroImg.webp" alt="Hero" class="w-screen h-[80vw] min-h-[250px] max-h-[630px] object-cover block"
     />
   </div>
   <div>
@@ -20,7 +20,6 @@
   :alt="recipe.recipeTitle"
   @error="handleImageError"
   class="w-full aspect-square object-cover rounded mb-2"
-
 >
     <h2 class="text-lg sm:text-xl font-bold mb-2 text-center">{{ recipe.recipeTitle }}</h2>
     <p class="text-sm sm:text-base">{{ recipe.category }}</p>
