@@ -11,7 +11,7 @@
   :src="recipe.imageUrl"
   :alt="recipe.recipeTitle"
   @error="handleImageError"
-  class="w-full aspect-square object-cover rounded mb-2"
+  class="w-3/4 sm:w-2/3 mx-auto aspect-square object-cover rounded mb-2"
 >
         <!-- Kategori og sværhedsgrad -->
         <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
