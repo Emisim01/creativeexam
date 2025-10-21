@@ -25,7 +25,12 @@
     @click="goToRecipe(recipe.id)"
     class="bg-white text-dark-grass rounded-lg p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
   >
-    <img src="@/assets/heroImg.png" alt="" />
+<img
+  :src="recipe.imageUrl"
+  :alt="recipe.recipeTitle"
+  @error="handleImageError"
+  class="w-full aspect-square object-cover rounded mb-2"
+>
     <h2 class="text-xl font-bold mb-2">{{ recipe.recipeTitle }}</h2>
     <p class="">{{ recipe.category }}</p>
     <p class="">{{ recipe.difficulty }}</p>
@@ -66,6 +71,11 @@ const filteredRecipes = computed(() => {
   }
   return recipes.value.filter(recipe => recipe.category === selectedCategory.value)
 })
+
+// Error handling for billeder
+const handleImageError = (event) => {
+  event.target.src = '/src/assets/heroImg.png' // Fallback billede
+}
 
 const goToRecipe = (id) => {
   // Naviger til den enkelte opskrift ved hjælp af dens id

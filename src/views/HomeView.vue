@@ -15,7 +15,13 @@
     @click="goToRecipe(recipe.id)"
     class="bg-white rounded-lg p-3 sm:p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
   >
-    <img src="@/assets/heroImg.png" alt="" class="w-full h-32 sm:h-auto object-cover rounded mb-2">
+<img
+  :src="recipe.imageUrl"
+  :alt="recipe.recipeTitle"
+  @error="handleImageError"
+  class="w-full aspect-square object-cover rounded mb-2"
+
+>
     <h2 class="text-lg sm:text-xl font-bold mb-2 text-center">{{ recipe.recipeTitle }}</h2>
     <p class="text-sm sm:text-base">{{ recipe.category }}</p>
     <p class="text-sm sm:text-base">{{ recipe.difficulty }}</p>
@@ -151,6 +157,11 @@ const goToCategory = (category) => {
     name: 'Recipes',
     query: { category: category }
   })
+}
+
+// Error handling for billeder
+const handleImageError = (event) => {
+  event.target.src = '/src/assets/heroImg.png' // Fallback billede
 }
 
 </script>

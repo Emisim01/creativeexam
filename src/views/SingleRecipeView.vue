@@ -3,9 +3,16 @@
     <!-- Recipe Content -->
     <div v-if="recipe" class="recipeBox max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
       <!-- Hero Section -->
+
+
       <div class="bg-gradient-to-r from-light-grass to-light-grass/80 p-6 sm:p-8 text-center">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-dark-grass">{{ recipe.recipeTitle }}</h1>
-
+<img
+  :src="recipe.imageUrl"
+  :alt="recipe.recipeTitle"
+  @error="handleImageError"
+  class="w-full aspect-square object-cover rounded mb-2"
+>
         <!-- Kategori og sværhedsgrad -->
         <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
           <span class="bg-white/20 px-4 py-2 rounded-full text-dark-grass font-semibold">

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import { getAuth, onAuthStateChanged } from 'firebase/auth' // Importer onAuthStateChanged
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/composables/firebase.js'
 

@@ -67,8 +67,9 @@ onMounted(() => {
         materialUsed: updatedData.materialUsed.split('\n').filter(m => m.trim() !== ''),
         steps: updatedData.steps.split('\n').filter(s => s.trim() !== ''),
         videoLink: updatedData.videoLink,
+        imageUrl: newRecipe.value.imageUrl,
         updatedAt: serverTimestamp()
-      });
+      }); //this is called a payload (the things inside the updateDoc function)
 
       console.log(`Recipe with ID: ${id} has been updated.`);
 

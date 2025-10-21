@@ -1,5 +1,11 @@
 <template>
-  <!-- Vises kun hvis brugeren er admin -->
+    <!-- separation of concern (SOC) (THis shold nor be here its just a comment i need to remember) -->
+    <!-- Single responsibility principle (SRP) -->
+    <!-- Add a toastbar when you added a new recipe and edited or updated an existing recipe -->
+
+
+
+  <!-- Vises kun hvis brugeren er admin-->
   <div v-if="isAdmin" class="mx-auto p-4 sm:p-6">
     <h1 class="welcomeText text-center mb-6 sm:mb-10 text-2xl sm:text-4xl">Admin Panel</h1>
 
@@ -18,6 +24,14 @@
           v-model="newRecipe.recipeTitle"
           class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base"
         />
+
+          <!-- Image URL felt (nyt) -->
+  <input
+    type="url"
+    placeholder="Image URL (link to recipe image)"
+    v-model="newRecipe.imageUrl"
+    class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base"
+  />
 
         <!-- Kategori og Sværhedsgrad (stacked på mobil, side om side på desktop) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -167,7 +181,8 @@ const editRecipe = async (recipe) => {
     difficulty: recipe.difficulty,
     materialUsed: Array.isArray(recipe.materialUsed) ? recipe.materialUsed.join('\n') : recipe.materialUsed,
     steps: Array.isArray(recipe.steps) ? recipe.steps.join('\n') : recipe.steps,
-    videoLink: recipe.videoLink || ''
+    videoLink: recipe.videoLink || '',
+    imageUrl: recipe.imageUrl || '' // Tilføj imageUrl
   }
 
   // Scroll op til formularen efter DOM er opdateret
@@ -188,7 +203,9 @@ const cancelEdit = () => {
     difficulty: '',
     materialUsed: '',
     steps: '',
-    videoLink: ''
+    videoLink: '',
+    imageUrl: '' // Tilføj imageUrl
+
   }
 }
 
