@@ -20,9 +20,20 @@ export function useRecipes() {
   const newRecipe = ref(createNewRecipeObject());
 
 onMounted(() => {
-  // FJERN orderBy midlertidigt for at se dine eksisterende opskrifter
   onSnapshot(recipesFirebaseCollectionRef, (snapshot) => {
-    recipes.value = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    const recipesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // SIMPEL sortering - nyeste først
+    recipes.value = recipesData.sort((a, b) => {
+      // Hvis begge har createdAt
+      if (a.createdAt && b.createdAt) {
+        return b.createdAt.seconds - a.createdAt.seconds
+      }
+      // Hvis kun en har createdAt, sæt den med timestamp først
+      if (a.createdAt) return -1
+      if (b.createdAt) return 1
+      return 0
+    });
   });
 });
 
@@ -44,7 +55,7 @@ const addRecipe = async (recipeData) => {
     materialUsed: materialsArray,
     steps: stepsArray,
     videoLink: recipeData.videoLink,
-    imageUrl: recipeData.imageUrl, // Tilføj denne linje
+    imageUrl: recipeData.imageUrl,
     createdAt: serverTimestamp()
   });
 
