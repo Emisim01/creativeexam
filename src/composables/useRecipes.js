@@ -44,9 +44,10 @@ const addRecipe = async (recipeData) => {
     return;
   }
 
-  // Omdan tekst fra textarea til arrays ved at splitte på linjeskift
+    // Omdan tekst fra textarea til arrays ved at splitte på linjeskift
   const materialsArray = recipeData.materialUsed.split('\n').filter(m => m.trim() !== '');
   const stepsArray = recipeData.steps.split('\n').filter(s => s.trim() !== '');
+
 
   await addDoc(recipesFirebaseCollectionRef, {
     recipeTitle: recipeData.recipeTitle,
@@ -71,13 +72,17 @@ const addRecipe = async (recipeData) => {
         return;
       }
 
+  // Omdan tekst fra textarea til arrays ved at splitte på linjeskift
+  const materialsArray = updatedData.materialUsed.split('\n').filter(m => m.trim() !== '');
+  const stepsArray = updatedData.steps.split('\n').filter(s => s.trim() !== '');
+
       const recipeDoc = doc(db, "recipes", id);
       await updateDoc(recipeDoc, {
         recipeTitle: updatedData.recipeTitle,
         category: updatedData.category,
         difficulty: updatedData.difficulty,
-        materialUsed: updatedData.materialUsed.split('\n').filter(m => m.trim() !== ''),
-        steps: updatedData.steps.split('\n').filter(s => s.trim() !== ''),
+        materialUsed: materialsArray,
+        steps: stepsArray,
         videoLink: updatedData.videoLink,
         imageUrl: updatedData.imageUrl,
         updatedAt: serverTimestamp()
