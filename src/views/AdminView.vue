@@ -1,9 +1,6 @@
 <template>
     <!-- separation of concern (SOC) (THis shold nor be here its just a comment i need to remember) -->
     <!-- Single responsibility principle (SRP) -->
-    <!-- Add a toastbar when you added a new recipe and edited or updated an existing recipe -->
-
-
 
   <!-- Vises kun hvis brugeren er admin-->
   <div v-if="isAdmin" class="mx-auto p-4 sm:p-6">
@@ -21,7 +18,7 @@
         <input
           type="text"
           placeholder="Recipe Title"
-          v-model="newRecipe.recipeTitle"
+          v-model="formData.recipeTitle"
           class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base"
         />
 
@@ -29,13 +26,13 @@
   <input
     type="url"
     placeholder="Image URL (link to recipe image)"
-    v-model="newRecipe.imageUrl"
+    v-model="formData.imageUrl"
     class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base"
   />
 
         <!-- Kategori og Sværhedsgrad (stacked på mobil, side om side på desktop) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <select v-model="newRecipe.category" class="w-full p-3 bg-white/20 text-light-grass rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base">
+          <select v-model="formData.category" class="w-full p-3 bg-white/20 text-light-grass rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base">
             <option disabled value="">Select a category</option>
             <option>Sewing</option>
             <option>Drawing</option>
@@ -43,7 +40,7 @@
             <option>Digital Design</option>
             <option>Embroidery</option>
           </select>
-          <select v-model="newRecipe.difficulty" class="w-full p-3 bg-white/20 text-light-grass rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base">
+          <select v-model="formData.difficulty" class="w-full p-3 bg-white/20 text-light-grass rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base">
             <option disabled value="">Select difficulty</option>
             <option>Easy</option>
             <option>Medium</option>
@@ -54,7 +51,7 @@
         <!-- Materialer -->
         <textarea
           placeholder="Materials used (one item per line)"
-          v-model="newRecipe.materialUsed"
+          v-model="formData.materialUsed"
           rows="4"
           class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base resize-none"
         ></textarea>
@@ -62,7 +59,7 @@
         <!-- Steps -->
         <textarea
           placeholder="Steps (one step per line)"
-          v-model="newRecipe.steps"
+          v-model="formData.steps"
           :rows="5"
           class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base resize-none sm:rows-6"
         ></textarea>
@@ -71,7 +68,7 @@
         <input
           type="text"
           placeholder="YouTube Video Link (optional)"
-          v-model="newRecipe.videoLink"
+          v-model="formData.videoLink"
           class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base"
         />
 
@@ -87,7 +84,7 @@
           <!-- Cancel knap (kun vis hvis vi redigerer) -->
           <button
             v-if="editingRecipe"
-            @click="cancelEdit"
+            @click="cancelEditing"
             class="w-full sm:w-auto bg-gray-400 !text-white font-bold px-4 py-3 sm:py-2 rounded-md hover:bg-opacity-80 hover:scale-[1.02] transition text-sm sm:text-base"
           >
             Cancel
@@ -157,69 +154,44 @@
 </template>
 
 <script setup>
-import { ref, nextTick } from 'vue'
 import { useAdmin } from '@/composables/useAdmin.js'
-import { useRecipes } from '../composables/useRecipes.js'
+import { useRecipes } from '@/composables/useRecipes.js'
+import { useAdminForm } from '@/composables/useAdminForm.js'
 
-// Hent funktioner fra useRecipes
-const { recipes, newRecipe, addRecipe, updateRecipe, deleteRecipe } = useRecipes()
-
-// Hent bare isAdmin. Den opdaterer sig selv!
+// Admin authentication
 const { isAdmin } = useAdmin()
 
-// State for redigering
-const editingRecipe = ref(null)
+// Recipe operations
+const { recipes, addRecipe, updateRecipe, deleteRecipe } = useRecipes()
 
-// Funktion til at starte redigering af en opskrift
-const editRecipe = async (recipe) => {
-  editingRecipe.value = recipe
+// Form management
+const {
+  editingRecipe,
+  formData,
+  startEditing,
+  cancelEditing,
+  resetForm,
+} = useAdminForm()
 
-  // Fyld formularen med eksisterende data
-  newRecipe.value = {
-    recipeTitle: recipe.recipeTitle,
-    category: recipe.category,
-    difficulty: recipe.difficulty,
-    materialUsed: Array.isArray(recipe.materialUsed) ? recipe.materialUsed.join('\n') : recipe.materialUsed,
-    steps: Array.isArray(recipe.steps) ? recipe.steps.join('\n') : recipe.steps,
-    videoLink: recipe.videoLink || '',
-    imageUrl: recipe.imageUrl || '' // Tilføj imageUrl
-  }
-
-  // Scroll op til formularen efter DOM er opdateret
-  await nextTick()
-  document.querySelector('.recipeMaker').scrollIntoView({
-    behavior: 'smooth',
-    block: 'start'
-  })
-}
-
-// Funktion til at annullere redigering
-const cancelEdit = () => {
-  editingRecipe.value = null
-  // Nulstil formularen
-  newRecipe.value = {
-    recipeTitle: '',
-    category: '',
-    difficulty: '',
-    materialUsed: '',
-    steps: '',
-    videoLink: '',
-    imageUrl: '' // Tilføj imageUrl
-
-  }
-}
-
-// Funktion til at gemme (både tilføje og opdatere)
 const saveRecipe = async () => {
-  if (editingRecipe.value) {
-    // Opdater eksisterende opskrift
-    await updateRecipe(editingRecipe.value.id, newRecipe.value)
-    editingRecipe.value = null
-  } else {
-    // Tilføj ny opskrift
-    await addRecipe()
+  try {
+    if (editingRecipe.value) {
+      await updateRecipe(editingRecipe.value.id, formData.value)
+      cancelEditing()
+    } else {
+      await addRecipe(formData.value)
+      resetForm()
+    }
+  } catch (error) {
+    console.error('Error saving recipe:', error)
   }
 }
+
+// Edit recipe (simplified)
+const editRecipe = async (recipe) => {
+  await startEditing(recipe)
+}
+
 </script>
 
 <style scoped>

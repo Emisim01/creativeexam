@@ -9,9 +9,10 @@ const createNewRecipeObject = () => ({
   recipeTitle: "",
   category: "",
   difficulty: "",
-  materialUsed: "", // Bliver til et array senere
-  steps: "",        // Bliver til et array senere
-  videoLink: ""
+  materialUsed: "",
+  steps: "",
+  videoLink: "",
+  imageUrl: ""
 });
 
 export function useRecipes() {
@@ -25,30 +26,30 @@ onMounted(() => {
   });
 });
 
-  const addRecipe = async () => {
-    // Tjekker om de vigtigste felter er udfyldt
-    if (!newRecipe.value.recipeTitle || !newRecipe.value.category || !newRecipe.value.difficulty) {
-      alert("Please fill out title, category, and difficulty.");
-      return;
-    }
+const addRecipe = async (recipeData) => {
+  // Tjekker om de vigtigste felter er udfyldt
+  if (!recipeData.recipeTitle || !recipeData.category || !recipeData.difficulty) {
+    alert("Please fill out title, category, and difficulty.");
+    return;
+  }
 
-    // Omdan tekst fra textarea til arrays ved at splitte på linjeskift
-    const materialsArray = newRecipe.value.materialUsed.split('\n').filter(m => m.trim() !== '');
-    const stepsArray = newRecipe.value.steps.split('\n').filter(s => s.trim() !== '');
+  // Omdan tekst fra textarea til arrays ved at splitte på linjeskift
+  const materialsArray = recipeData.materialUsed.split('\n').filter(m => m.trim() !== '');
+  const stepsArray = recipeData.steps.split('\n').filter(s => s.trim() !== '');
 
-    await addDoc(recipesFirebaseCollectionRef, {
-      recipeTitle: newRecipe.value.recipeTitle,
-      category: newRecipe.value.category,
-      difficulty: newRecipe.value.difficulty,
-      materialUsed: materialsArray,
-      steps: stepsArray,
-      videoLink: newRecipe.value.videoLink,
-      createdAt: serverTimestamp() // TILFØJ DETTE for at kunne sortere
-    });
+  await addDoc(recipesFirebaseCollectionRef, {
+    recipeTitle: recipeData.recipeTitle,
+    category: recipeData.category,
+    difficulty: recipeData.difficulty,
+    materialUsed: materialsArray,
+    steps: stepsArray,
+    videoLink: recipeData.videoLink,
+    imageUrl: recipeData.imageUrl, // Tilføj denne linje
+    createdAt: serverTimestamp()
+  });
 
-    // Nulstil formularen efter tilføjelse
-    newRecipe.value = createNewRecipeObject();
-  };
+  console.log('Recipe added successfully!');
+};
 
   // Opdater en eksisterende opskrift
   const updateRecipe = async (id, updatedData) => {
@@ -67,7 +68,7 @@ onMounted(() => {
         materialUsed: updatedData.materialUsed.split('\n').filter(m => m.trim() !== ''),
         steps: updatedData.steps.split('\n').filter(s => s.trim() !== ''),
         videoLink: updatedData.videoLink,
-        imageUrl: newRecipe.value.imageUrl,
+        imageUrl: updatedData.imageUrl,
         updatedAt: serverTimestamp()
       }); //this is called a payload (the things inside the updateDoc function)
 
