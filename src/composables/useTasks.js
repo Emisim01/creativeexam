@@ -19,5 +19,8 @@ export function useTasks() {
     tasks.value = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }))
   }
 
-  return { tasks, fetchTasks }
+  return {
+    tasks,
+    fetchTasks
+  }
 }

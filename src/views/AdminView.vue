@@ -22,7 +22,7 @@
           class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base"
         />
 
-          <!-- Image URL felt (nyt) -->
+          <!-- Billede URL felt -->
   <input
     type="url"
     placeholder="Image URL (link to recipe image)"
@@ -32,6 +32,8 @@
 
         <!-- Kategori og Sværhedsgrad (stacked på mobil, side om side på desktop) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- KATEGORI DROPDOWN -->
           <select v-model="formData.category" class="w-full p-3 bg-white/20 text-light-grass rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base">
             <option disabled value="">Select a category</option>
             <option>Sewing</option>
@@ -40,6 +42,8 @@
             <option>Digital Design</option>
             <option>Embroidery</option>
           </select>
+
+          <!-- SVÆRHEDSGRAD DROPDOWN -->
           <select v-model="formData.difficulty" class="w-full p-3 bg-white/20 text-light-grass rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base">
             <option disabled value="">Select difficulty</option>
             <option>Easy</option>
@@ -96,53 +100,42 @@
     <!-- Sektion for at se og slette eksisterende opskrifter -->
     <div class="existingRecipeList mx-2 sm:mx-8 lg:mx-16">
       <h2 class="welcomeText text-center mb-6 sm:mb-10 text-2xl sm:text-4xl">Manage Recipes</h2>
-      <ul class="!space-y-3 sm:!space-y-4">
-        <li v-for="recipe in recipes" :key="recipe.id" class="bg-white/10 p-3 sm:p-4 rounded-lg shadow-md">
-          <!-- Mobile Layout (stacked) -->
-          <div class="sm:hidden">
-            <div class="mb-3">
-              <span class="font-medium text-sm text-light-grass block">{{ recipe.recipeTitle }}</span>
-              <span class="text-xs text-light-grass/60">ID: {{ recipe.id }}</span>
-            </div>
-            <div class="knapper flex gap-2 justify-end">
-              <button
-                @click="editRecipe(recipe)"
-                class="bg-blue-500/70 !text-white px-3 py-2 text-xs rounded hover:bg-blue-500/90 transition-colors"
-              >
-                Edit
-              </button>
-              <button
-                @click="deleteRecipe(recipe.id)"
-                class="bg-red-500/70 !text-white px-3 py-2 text-xs rounded hover:bg-red-500/90 transition-colors"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
 
-          <!-- Desktop Layout (side by side) -->
-          <div class="hidden sm:flex justify-between items-center">
-            <div>
-              <span class="font-medium text-base text-light-grass">{{ recipe.recipeTitle }}</span>
-              <span class="block text-xs text-light-grass/60">ID: {{ recipe.id }}</span>
-            </div>
-            <div class="knapper flex gap-2">
-              <button
-                @click="editRecipe(recipe)"
-                class="bg-blue-500/70 !text-white px-2 py-1 text-xs rounded hover:bg-blue-500/90 transition-colors"
-              >
-                Edit
-              </button>
-              <button
-                @click="deleteRecipe(recipe.id)"
-                class="bg-red-500/70 !text-white px-2 py-1 text-xs rounded hover:bg-red-500/90 transition-colors"
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        </li>
-      </ul>
+          <!-- OPSKRIFT LISTE: Loop gennem alle opskrifter -->
+<ul class="space-y-3 sm:space-y-4">
+  <li v-for="recipe in recipes" :key="recipe.id" class="bg-white/10 p-3 sm:p-4 rounded-lg shadow-md">
+
+    <!-- ÉT RESPONSIVT LAYOUT (erstatter begge de gamle) -->
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+
+      <!-- OPSKRIFT INFO: Responsiv til mobil og desktop -->
+      <div class="mb-3 sm:mb-0">
+        <span class="font-medium text-sm sm:text-base text-light-grass block">
+          {{ recipe.recipeTitle }}
+        </span>
+        <span class="text-xs text-light-grass/60">ID: {{ recipe.id }}</span>
+      </div>
+
+      <!-- HANDLINGS KNAPPER: Responsiv til mobil og desktop -->
+      <div class="knapper flex gap-2 justify-end sm:justify-start">
+        <button
+          @click="editRecipe(recipe)"
+          class="bg-blue-500/70 !text-white px-2 sm:px-3 py-1 sm:py-2 text-xs rounded hover:bg-blue-500/90 transition-colors"
+        >
+          Edit
+        </button>
+        <button
+          @click="deleteRecipe(recipe.id)"
+          class="bg-red-500/70 !text-white px-2 sm:px-3 py-1 sm:py-2 text-xs rounded hover:bg-red-500/90 transition-colors"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+
+  </li>
+</ul>
+
     </div>
   </div>
 
