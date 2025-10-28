@@ -1,14 +1,13 @@
 import { ref, computed } from 'vue'
 import { firebaseApp } from '../composables/firebase'
-import {  } from 'firebase/auth'
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, createUserWithEmailAndPassword  } from 'firebase/auth'
 
 const auth = getAuth(firebaseApp)
 
-const currentUser = ref(null)
-const isLoggedIn = computed(() => !!currentUser.value)
+const currentUser = ref(null) // null = ingen er logget ind
+const isLoggedIn = computed(() => !!currentUser.value)// Er nogen logget ind? !! betyder "konverter til true/false"
 const authError = ref(null)
-const loading = ref(false)
+const loading = ref(false) // LOADING SPINNER: Viser "Loading..." mens vi venter. False = ikke loading
 const user = ref(null)
 
 onAuthStateChanged(auth, (user) => {
@@ -16,7 +15,7 @@ onAuthStateChanged(auth, (user) => {
 })
 
 
-
+// FUNKTION: Log en bruger ind
 const login = async (email, password) => {
   console.log('Logging in with: ', email)
   loading.value = true
@@ -32,7 +31,7 @@ const login = async (email, password) => {
   }
 }
 
-// Registration function - with help from Copilot :)
+// Opret ny bruger konto
 const register = async (email, password) => {
   console.log("Attempting registration with email:", email);
   loading.value = true;
@@ -48,12 +47,14 @@ const register = async (email, password) => {
   }
 }
 
+// Log brugeren ud
 const logout = async (routerInstance) => {
   console.log('Logging out of this mail: ', currentUser.value?.email)
   loading.value = true
   authError.value = null
   try {
     await signOut(auth)
+    // Send brugeren til forsiden (hvis router er givet)
     if (routerInstance) {
       routerInstance.push('/')
     }
@@ -66,6 +67,7 @@ const logout = async (routerInstance) => {
   }
 }
 
+//skal være der igen for at comment section registrerer ændringer i brugerens login status
 export function useAuth() {
     const auth = getAuth()
   onAuthStateChanged(auth, (u) => {

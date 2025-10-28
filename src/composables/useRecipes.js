@@ -20,6 +20,8 @@ export function useRecipes() {
   const newRecipe = ref(createNewRecipeObject());
 
 onMounted(() => {
+
+// Dette opdaterer automatisk når tilføjer/ændrer opskrifter!
   onSnapshot(recipesFirebaseCollectionRef, (snapshot) => {
     const recipesData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
@@ -32,19 +34,22 @@ onMounted(() => {
       // Hvis kun en har createdAt, sæt den med timestamp først
       if (a.createdAt) return -1
       if (b.createdAt) return 1
+
+      // Hvis ingen har timestamp, behold original rækkefølge
       return 0
     });
   });
 });
 
 const addRecipe = async (recipeData) => {
+
   // Tjekker om de vigtigste felter er udfyldt
   if (!recipeData.recipeTitle || !recipeData.category || !recipeData.difficulty) {
     alert("Please fill out title, category, and difficulty.");
-    return;
+    return; // Stop funktionen hvis noget mangler
   }
 
-    // Omdan tekst fra textarea til arrays ved at splitte på linjeskift
+  // Omdan tekst fra textarea til arrays ved at splitte på linjeskift
   const materialsArray = recipeData.materialUsed.split('\n').filter(m => m.trim() !== '');
   const stepsArray = recipeData.steps.split('\n').filter(s => s.trim() !== '');
 
@@ -66,13 +71,12 @@ const addRecipe = async (recipeData) => {
   // Opdater en eksisterende opskrift
   const updateRecipe = async (id, updatedData) => {
     try {
-      // Validering
+      // Sikkerhedstjek
       if (!updatedData.recipeTitle || !updatedData.category || !updatedData.difficulty) {
         alert("Please fill out title, category, and difficulty.");
         return;
       }
 
-  // Omdan tekst fra textarea til arrays ved at splitte på linjeskift
   const materialsArray = updatedData.materialUsed.split('\n').filter(m => m.trim() !== '');
   const stepsArray = updatedData.steps.split('\n').filter(s => s.trim() !== '');
 
@@ -86,7 +90,7 @@ const addRecipe = async (recipeData) => {
         videoLink: updatedData.videoLink,
         imageUrl: updatedData.imageUrl,
         updatedAt: serverTimestamp()
-      }); //this is called a payload (the things inside the updateDoc function)
+      }); // Dette objekt kaldes en "payload" (data der sendes)
 
       console.log(`Recipe with ID: ${id} has been updated.`);
 
@@ -98,10 +102,19 @@ const addRecipe = async (recipeData) => {
     }
   };
 
+  // Slet opskrift fra databasen
   const deleteRecipe = async(id) => {
+    // FIND og SLET: Peg på opskriften og fjern den
     const recipeDoc = doc(db, "recipes", id);
     await deleteDoc(recipeDoc);
+    // onSnapshot opdaterer automatisk listen når opskriften er slettet!
   };
 
-  return { recipes, newRecipe, addRecipe, updateRecipe, deleteRecipe };
+  return {
+    recipes,
+    newRecipe,
+    addRecipe,
+    updateRecipe,
+    deleteRecipe
+  };
 }
