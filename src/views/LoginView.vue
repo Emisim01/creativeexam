@@ -3,11 +3,16 @@
     <div class="min-h-screen">
   <div class="login-view  text-light-grass p-8 bg-white/10 rounded">
     <h1>Login here!</h1>
+
+    <!-- LOGIN FORMULAR: Forhindrer side reload ved submit -->
     <form class="flex flex-col" @submit.prevent="loginUser">
-      <input class="border border-light-grass p-2 !mb-4 rounded" type="email" v-model="email" placeholder="Email" required />
-      <input class="border border-light-grass p-2 !mb-4 rounded" type="password" v-model="password" placeholder="Password" required />
+
+      <input class="border border-light-grass p-2 mb-4 rounded" type="email" v-model="email" placeholder="Email" required />
+      <input class="border border-light-grass p-2 mb-4 rounded" type="password" v-model="password" placeholder="Password" required />
       <button class="bg-light-grass text-dark-grass rounded" type="submit" :disabled="loading">Login</button>
-      <router-link to="/register" class="text-light-grass text-center !mt-4">Register</router-link>
+        <router-link to="/register" class="text-light-grass text-center mt-4">
+          Don't have an account? Register here
+        </router-link>
     </form>
 
 <div class="error" v-if="authError">
@@ -47,6 +52,10 @@ const loginUser = () => {
 
 .error {
   color: red;
-  margin-top: 16px
+  margin-top: 16px;
+  padding: 12px;
+  background-color: rgba(255, 0, 0, 0.1);  /* Light red background */
+  border: 1px solid red;
+  border-radius: 4px;
 }
 </style>

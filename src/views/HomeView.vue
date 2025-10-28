@@ -21,6 +21,8 @@
   @error="handleImageError"
   class="w-full aspect-square object-cover rounded mb-2"
 >
+
+<!-- OPSKRIFT INFO: Titel, kategori og sværhedsgrad -->
     <h2 class="text-lg sm:text-xl font-bold mb-2 text-center">{{ recipe.recipeTitle }}</h2>
     <p class="text-sm sm:text-base">{{ recipe.category }}</p>
     <p class="text-sm sm:text-base">{{ recipe.difficulty }}</p>
@@ -59,78 +61,53 @@
       </div>
     </div>
 
+
+
+<!-- ÉT RESPONSIVT "HOW IT WORKS" LAYOUT -->
 <div>
-    <p class="welcomeText p-2 sm:p-4 font-bold text-white flex justify-center gap-4 text-2xl sm:text-4xl">This is how it works!</p>
-</div>
+  <!-- SECTION TITEL -->
+  <p class="welcomeText p-2 sm:p-4 font-bold text-white flex justify-center gap-4 text-2xl sm:text-4xl">
+    This is how it works!
+  </p>
 
-<!-- Mobile version (hidden on desktop) -->
-<div class="block lg:hidden mx-4 my-8 space-y-8">
-  <!-- Step 1 -->
-  <div class="flex items-center gap-4 text-light-grass">
-    <img src="@/assets/icons/touchscreen.png" alt="Touchscreen" class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-    <div>
-      <p class="text-lg sm:text-xl font-semibold">Find a Creative Recipe</p>
+  <!-- RESPONSIV GUIDE: Stacked på mobil, horizontal på desktop -->
+  <div class="mx-4 my-8 lg:my-16 lg:mx-auto lg:max-w-6xl">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-center lg:gap-8 xl:gap-16 space-y-8 lg:space-y-0">
+
+      <!-- STEP 1: Find Recipe -->
+      <div class="flex items-center gap-4 lg:flex-col lg:text-center text-light-grass">
+        <img src="@/assets/icons/touchscreen.png" alt="Touchscreen" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-32 lg:h-32 flex-shrink-0">
+        <p class="text-lg sm:text-xl lg:text-2xl lg:mt-6 font-semibold">Find a Creative Recipe</p>
+      </div>
+
+      <!-- ARROW 1: Kun synlig på desktop -->
+      <img src="@/assets/icons/arrow.png" alt="Arrow" class="hidden lg:block w-12 h-12 xl:w-16 xl:h-16">
+
+      <!-- STEP 2: Follow Steps -->
+      <div class="flex items-center gap-4 lg:flex-col lg:text-center text-light-grass">
+        <img src="@/assets/icons/stepsComplete.png" alt="Steps Complete" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-32 lg:h-32 flex-shrink-0">
+        <p class="text-lg sm:text-xl lg:text-2xl lg:mt-6 font-semibold">Follow the Steps</p>
+      </div>
+
+      <!-- ARROW 2: Kun synlig på desktop -->
+      <img src="@/assets/icons/arrow.png" alt="Arrow" class="hidden lg:block w-12 h-12 xl:w-16 xl:h-16">
+
+      <!-- STEP 3: Leave Comment -->
+      <div class="flex items-center gap-4 lg:flex-col lg:text-center text-light-grass">
+        <img src="@/assets/icons/comment.png" alt="Comment" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-32 lg:h-32 flex-shrink-0">
+        <p class="text-lg sm:text-xl lg:text-2xl lg:mt-6 font-semibold">Leave a Comment</p>
+      </div>
+
+      <!-- ARROW 3: Kun synlig på desktop -->
+      <img src="@/assets/icons/arrow.png" alt="Arrow" class="hidden lg:block w-12 h-12 xl:w-16 xl:h-16">
+
+      <!-- STEP 4: Share -->
+      <div class="flex items-center gap-4 lg:flex-col lg:text-center text-light-grass">
+        <img src="@/assets/icons/share.png" alt="Share" class="w-16 h-16 sm:w-20 sm:h-20 lg:w-32 lg:h-32 flex-shrink-0">
+        <p class="text-lg sm:text-xl lg:text-2xl lg:mt-6 font-semibold">Share with Your Friends</p>
+      </div>
+
     </div>
-  </div>
-
-  <!-- Step 2 -->
-  <div class="flex items-center gap-4 text-light-grass">
-    <img src="@/assets/icons/stepsComplete.png" alt="Steps Complete" class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-    <div>
-      <p class="text-lg sm:text-xl font-semibold">Follow the Steps</p>
-    </div>
-  </div>
-
-  <!-- Step 3 -->
-  <div class="flex items-center gap-4 text-light-grass">
-    <img src="@/assets/icons/comment.png" alt="Comment" class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-    <div>
-      <p class="text-lg sm:text-xl font-semibold">Leave a Comment</p>
-    </div>
-  </div>
-
-  <!-- Step 4 -->
-  <div class="flex items-center gap-4 text-light-grass">
-    <img src="@/assets/icons/share.png" alt="Share" class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0">
-    <div>
-      <p class="text-lg sm:text-xl font-semibold">Share with Your Friends</p>
-    </div>
-  </div>
-</div>
-
-<!-- Desktop version (hidden on mobile) -->
-<div class="guide hidden lg:flex items-center text-light-grass justify-center gap-16 my-16">
-  <!-- Touchscreen Icon -->
-  <div class="flex flex-col items-center">
-    <img src="@/assets/icons/touchscreen.png" alt="Touchscreen" class="w-32 h-32">
-    <p class=" text-center !mt-6 text-2xl">Find a Creative Recipe</p>
-  </div>
-
-  <!-- Arrow -->
-  <img src="@/assets/icons/arrow.png" alt="Arrow" class="w-16 h-16">
-
-  <!-- Steps Complete Icon -->
-  <div class="flex flex-col items-center">
-    <img src="@/assets/icons/stepsComplete.png" alt="Steps Complete" class="w-32 h-32">
-    <p class=" text-center !mt-6 text-2xl">Follow the Steps</p>
-  </div>
-
-  <!-- Arrow -->
-  <img src="@/assets/icons/arrow.png" alt="Arrow" class="w-16 h-16">
-
-  <!-- Comment Icon -->
-  <div class="flex flex-col items-center">
-    <img src="@/assets/icons/comment.png" alt="Comment" class="w-32 h-32">
-    <p class=" text-center !mt-6 text-2xl">Leave a Comment</p>
-  </div>
-
-  <!-- Arrow -->
-  <img src="@/assets/icons/arrow.png" alt="Arrow" class="w-16 h-16">
-
-  <!-- Share Icon -->
-  <div class="flex flex-col items-center">
-    <img src="@/assets/icons/share.png" alt="Share" class="w-32 h-32">
-    <p class="text-center !mt-6 text-2xl">Share with Your Friends</p>
   </div>
 </div>
 
@@ -140,7 +117,9 @@
 import { useRecipes } from '@/composables/useRecipes.js'
 import { useRouter } from 'vue-router' // Importér useRouter
 
-const router = useRouter() // Initialiser useRouter
+// ROUTER SETUP: Til navigation mellem sider
+const router = useRouter()
+
 const { recipes } = useRecipes()
 
 
@@ -150,7 +129,7 @@ const goToRecipe = (id) => {
 }
 
 
-// NY FUNKTION: Naviger til recipes med kategori-filter
+// Navigér til recipes siden med kategori-filter
 const goToCategory = (category) => {
   router.push({
     name: 'Recipes',
@@ -160,7 +139,7 @@ const goToCategory = (category) => {
 
 // Error handling for billeder
 const handleImageError = (event) => {
-  event.target.src = '/src/assets/heroImg.png' // Fallback billede
+  event.target.src = '/src/assets/heroImg.png'
 }
 
 </script>
