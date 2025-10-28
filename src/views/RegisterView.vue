@@ -28,4 +28,13 @@ const { email, password, loading, authError, registerUser } = useRegister()
   margin: 50px auto;
 }
 
+.error {
+  color: red;
+  margin-top: 16px;
+  padding: 12px;
+  background-color: rgba(255, 0, 0, 0.1);  /* Light red background */
+  border: 1px solid red;
+  border-radius: 4px;
+}
+
 </style>

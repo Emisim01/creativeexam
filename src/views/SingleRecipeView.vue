@@ -2,8 +2,6 @@
   <div class="min-h-screen px-4 py-6">
     <!-- Recipe Content -->
     <div v-if="recipe" class="recipeBox max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-      <!-- Hero Section -->
-
 
       <div class="bg-gradient-to-r from-light-grass to-light-grass/80 p-6 sm:p-8 text-center">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-dark-grass">{{ recipe.recipeTitle }}</h1>
@@ -26,6 +24,7 @@
 
       <!-- Content -->
       <div class="p-6 sm:p-8 text-dark-grass">
+
         <!-- Materialer -->
         <div class="mb-8">
           <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-center text-dark-grass flex items-center justify-center gap-2">
@@ -35,8 +34,10 @@
             <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
               <li v-for="(material, index) in recipe.materialUsed" :key="index"
                   class="flex items-center gap-2 p-2 bg-white rounded-lg shadow-sm">
+
                 <span class="w-2 h-2 bg-light-grass rounded-full flex-shrink-0"></span>
                 <span class="text-sm sm:text-base">{{ material }}</span>
+
               </li>
             </ul>
           </div>
@@ -79,6 +80,8 @@
 
     <!-- Loading State -->
     <div v-else class="text-center py-20">
+
+      <!-- LOADING SPINNER: Roterende cirkel animation -->
       <div class="animate-spin w-12 h-12 border-4 border-light-grass border-t-transparent rounded-full mx-auto mb-4"></div>
       <p class="text-light-grass text-lg">Loading recipe...</p>
     </div>
@@ -87,12 +90,16 @@
     <div class="commentSection max-w-4xl mx-auto mt-12">
       <h2 class="commentTextHeader text-center mb-4 sm:mb-8">💬 Comments</h2>
 
-      <!-- Add Comment Form (hvis logget ind) -->
+      <!-- TILFØJ KOMMENTAR FORMULAR: Kun synlig hvis brugeren er logget ind -->
       <div v-if="user" class="theCommentSection mb-8 bg-white/10 rounded-2xl p-4 sm:p-6 backdrop-blur-sm border border-light-grass/20">
         <div class="flex items-start gap-4">
+
+          <!-- BRUGER AVATAR: Cirkel med første bogstav af email -->
           <div class="w-10 h-10 bg-light-grass rounded-full flex items-center justify-center flex-shrink-0">
             <span class="text-dark-grass font-bold text-sm">{{ user.email?.charAt(0).toUpperCase() }}</span>
           </div>
+
+          <!-- KOMMENTAR INPUT OMRÅDE -->
           <div class="flex-1">
             <textarea
               v-model="commentText"
@@ -101,7 +108,9 @@
               rows="3"
             ></textarea>
 
+            <!-- POST KNAP OMRÅDE -->
             <div class="flex justify-end mt-3">
+            <!-- POST KOMMENTAR KNAP: Deaktiveret hvis tom eller loading -->
               <button
                 @click="addComment"
                 :disabled="loading || !commentText.trim()"
@@ -116,12 +125,11 @@
         <p v-if="error" class="text-red-400 mt-3 text-sm">{{ error }}</p>
       </div>
 
-      <!-- Login Prompt -->
+      <!-- Login Prompt, Vises kun hvis brugeren IKKE er logget ind-->
       <div v-else class="mustBeLoggedIn mb-8 bg-white/10 rounded-2xl p-6 text-center backdrop-blur-sm border border-light-grass/20">
         <div class="text-4xl mb-4">🔒</div>
         <p class="text-light-grass/80 mb-4 text-sm sm:text-base">Join the conversation!</p>
-        <RouterLink to="/login"
-                    class="inline-block bg-light-grass text-dark-grass font-bold px-6 py-3 rounded-xl hover:bg-opacity-80 transition">
+        <RouterLink to="/login" class="inline-block bg-light-grass text-dark-grass font-bold px-6 py-3 rounded-xl hover:bg-opacity-80 transition">
           Sign in to comment
         </RouterLink>
       </div>
@@ -143,9 +151,13 @@
 
             <!-- Comment Content -->
             <div class="flex-1 min-w-0">
+              <!-- KOMMENTAR HEADER: Navn og tidsstempel -->
               <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 gap-1">
+                <!-- KOMMENTATOR NAVN: Email adresse -->
                 <h4 class="font-bold text-light-grass text-sm sm:text-base">{{ comment.user }}</h4>
+                <!-- TIDSSTEMPEL: Dato og tid for kommentaren -->
                 <time class="text-xs sm:text-sm text-light-grass/70 flex items-center gap-1">
+
                   <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M10 2C5.59 2 2 5.59 2 10s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm0 14c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/>
                     <path d="M10 6v4l3 2-1.5 1.5L8 11V6h2z"/>
@@ -153,6 +165,7 @@
                   {{ comment.createdAt?.toDate?.().toLocaleString?.() }}
                 </time>
               </div>
+              <!-- Selve kommentaren -->
               <p class="text-light-grass/90 leading-relaxed text-sm sm:text-base break-words">{{ comment.text }}</p>
             </div>
           </div>
@@ -176,9 +189,12 @@ onMounted(async () => {
   try {
     const recipeId = route.params.id
     const recipeDoc = await getDoc(doc(db, 'recipes', recipeId))
+
+    // Tjek om opskriften findes
     if (recipeDoc.exists()) {
+      // SUCCESS: Gem opskrift data og start kommentar hentning
       recipe.value = { id: recipeDoc.id, ...recipeDoc.data() }
-      fetchComments()
+      fetchComments() // Hent kommentarer til denne opskrift
     } else {
       console.error('Recipe not found')
     }
@@ -196,6 +212,12 @@ const {
   error,
   user
 } = useComments(route.params.id)
+
+// FEJL HÅNDTERING: Hvis opskrift billede ikke kan indlæses
+const handleImageError = (event) => {
+  // ERSTAT: Det brudte billede med fallback
+  event.target.src = '/src/assets/heroImg.png'
+}
 </script>
 
 <style scoped>
