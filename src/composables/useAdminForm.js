@@ -1,11 +1,10 @@
-// composables/useAdminForm.js
 import { ref, nextTick, computed } from 'vue'
 
 export function useAdminForm() {
   // State for redigering
   const editingRecipe = ref(null)
 
-  // Initial form data
+ // SKABELON: Sådan ser en tom formular ud
   const getInitialFormData = () => ({
     recipeTitle: '',
     category: '',
@@ -16,48 +15,60 @@ export function useAdminForm() {
     imageUrl: ''
   })
 
-  // Form data state
+  // Her gemmes alt det brugeren skriver i formularen
   const formData = ref(getInitialFormData())
 
-  // Start editing a recipe
+  // Start med at redigere en eksisterende opskrift
   const startEditing = async (recipe) => {
-    editingRecipe.value = recipe
+    editingRecipe.value = recipe // Husk hvilken opskrift vi redigerer
 
-    // Map recipe data til form format
+    // STEP 2: Fyld formularen med opskriftens data
     formData.value = {
       recipeTitle: recipe.recipeTitle,
       category: recipe.category,
       difficulty: recipe.difficulty,
+
+      // ARRAY TIL TEKST: Hvis materialUsed er en liste, lav det til tekst
+      // Eksempel: ['Uldgarn', 'Hæklekrog'] bliver til 'Uldgarn\nHæklekrog'
       materialUsed: Array.isArray(recipe.materialUsed)
-        ? recipe.materialUsed.join('\n')
-        : recipe.materialUsed,
+        ? recipe.materialUsed.join('\n') // Sæt hver ting på ny linje
+        : recipe.materialUsed, // Eller brug som den er
+
+      // SAMME IGEN
       steps: Array.isArray(recipe.steps)
         ? recipe.steps.join('\n')
         : recipe.steps,
-      videoLink: recipe.videoLink || '',
-      imageUrl: recipe.imageUrl || ''
+
+      videoLink: recipe.videoLink || '', // Brug video link eller tom tekst
+      imageUrl: recipe.imageUrl || '' // Brug billede link eller tom tekst
     }
 
-    // Scroll til formularen efter DOM er opdateret
+
+    // STEP 3: Vent til siden er færdig med at opdatere
     await nextTick()
+
+    // NU er siden opdateret - nu kan vi scroll korrekt
+    // STEP 4: Scroll automatisk ned til formularen så brugeren kan se den
+    // '?' betyder "hvis elementet findes, så scroll - ellers gør ingenting"
     document.querySelector('.recipeMaker')?.scrollIntoView({
       behavior: 'smooth',
-      block: 'start'
+      block: 'start' // Scroll til toppen af formularen
     })
   }
 
-  // Cancel editing
+  // FUNKTION: Annuller redigering og gå tilbage til "tilføj ny" mode
   const cancelEditing = () => {
-    editingRecipe.value = null
+    editingRecipe.value = null // Glem hvilken opskrift vi redigerede
     formData.value = getInitialFormData()
   }
 
-  // Reset form
+  // FUNKTION: Nulstil formularen til dens oprindelige tilstand
   const resetForm = () => {
     formData.value = getInitialFormData()
   }
 
-  // Check if form is in edit mode
+  // SMART TJEK: Er vi i redigerings-mode eller tilføj-mode?
+  // Dette opdateres automatisk når editingRecipe ændres
   const isEditing = computed(() => editingRecipe.value !== null)
 
   return {
