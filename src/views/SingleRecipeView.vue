@@ -5,12 +5,12 @@
 
       <div class="bg-gradient-to-r from-light-grass to-light-grass/80 p-6 sm:p-8 text-center">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 text-dark-grass">{{ recipe.recipeTitle }}</h1>
-<img
-  :src="recipe.imageUrl"
-  :alt="recipe.recipeTitle"
-  @error="handleImageError"
-  class="w-3/4 sm:w-2/3 mx-auto aspect-square object-cover rounded mb-2"
->
+    <img
+      :src="recipe.imageUrl"
+      :alt="recipe.recipeTitle"
+      @error="handleImageError"
+      class="w-3/4 sm:w-2/3 mx-auto aspect-square object-cover rounded mb-2"
+    >
         <!-- Kategori og sværhedsgrad -->
         <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-6">
           <span class="bg-white/20 px-4 py-2 rounded-full text-dark-grass font-semibold">

@@ -63,7 +63,7 @@
 
 
 
-<!-- ÉT RESPONSIVT "HOW IT WORKS" LAYOUT -->
+<!-- "HOW IT WORKS" LAYOUT -->
 <div>
   <!-- SECTION TITEL -->
   <p class="welcomeText p-2 sm:p-4 font-bold text-white flex justify-center gap-4 text-2xl sm:text-4xl">

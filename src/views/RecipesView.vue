@@ -24,24 +24,24 @@
 
     <!-- Opskrifter -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
-  <div
-    v-for="recipe in filteredRecipes"
-    :key="recipe.id"
-    @click="goToRecipe(recipe.id)"
-    class="bg-white text-dark-grass rounded-lg p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
-  >
-<img
-  :src="recipe.imageUrl"
-  :alt="recipe.recipeTitle"
-  @error="handleImageError"
-  class="w-full aspect-square object-cover rounded mb-2"
->
+    <div
+      v-for="recipe in filteredRecipes"
+      :key="recipe.id"
+      @click="goToRecipe(recipe.id)"
+      class="bg-white text-dark-grass rounded-lg p-4 flex flex-col items-center cursor-pointer hover:scale-105 transition"
+    >
+    <img
+      :src="recipe.imageUrl"
+      :alt="recipe.recipeTitle"
+      @error="handleImageError"
+      class="w-full aspect-square object-cover rounded mb-2"
+    >
 
-  <!-- OPSKRIFT INFO: Titel, kategori og sværhedsgrad -->
-    <h2 class="text-xl font-bold mb-2">{{ recipe.recipeTitle }}</h2>
-    <p class="">{{ recipe.category }}</p>
-    <p class="">{{ recipe.difficulty }}</p>
-  </div>
+    <!-- OPSKRIFT INFO: Titel, kategori og sværhedsgrad -->
+      <h2 class="text-xl font-bold mb-2">{{ recipe.recipeTitle }}</h2>
+      <p class="">{{ recipe.category }}</p>
+      <p class="">{{ recipe.difficulty }}</p>
+    </div>
 </div>
 </template>
 

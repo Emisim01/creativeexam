@@ -23,12 +23,12 @@
         />
 
           <!-- Billede URL felt -->
-  <input
-    type="url"
-    placeholder="Image URL (link to recipe image)"
-    v-model="formData.imageUrl"
-    class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base"
-  />
+        <input
+          type="url"
+          placeholder="Image URL (link to recipe image)"
+          v-model="formData.imageUrl"
+          class="w-full p-3 bg-white/20 text-light-grass placeholder-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-light-grass text-sm sm:text-base"
+        />
 
         <!-- Kategori og Sværhedsgrad (stacked på mobil, side om side på desktop) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
